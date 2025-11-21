@@ -13,21 +13,20 @@ import {
 import { motion } from "motion/react";
 
 export default function HeroPage() {
-	const { t } = useTranslation("common");
+	const { t, locale } = useTranslation("common");
+
+	const fallingText = t("hero.fallingText");
+	const highlightWords = t("hero.fallingTextHighlights") as string[] | string;
+	const highlights = Array.isArray(highlightWords) ? highlightWords : [];
+
 	return (
 		<section className='min-h-screen w-full flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-20 relative overflow-hidden'>
 			{/* Falling Text - Behind */}
 			<div className='absolute inset-0 z-0 h-full overflow-hidden'>
 				<FallingText
-					text={`UX/UI Designer | Frontend Developer | Backend Developer | Graphic Designer | English Lecturer | ICT Lecturer`}
-					highlightWords={[
-						"UX/UI Designer",
-						"Frontend Developer",
-						"Backend Developer",
-						"Graphic Designer",
-						"English Lecturer",
-						"ICT Lecturer",
-					]}
+					key={locale}
+					text={fallingText}
+					highlightWords={highlights}
 					backgroundColor='transparent'
 					wireframes={false}
 					gravity={0.56}

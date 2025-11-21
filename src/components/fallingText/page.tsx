@@ -217,6 +217,8 @@ const FallingText: React.FC<FallingTextProps> = ({
 		wireframes,
 		backgroundColor,
 		mouseConstraintStiffness,
+		text,
+		highlightWords,
 	]);
 
 	const handleTrigger = () => {

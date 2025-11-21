@@ -27,7 +27,7 @@ const suwannaphum = Suwannaphum({
 
 export const metadata: Metadata = {
 	title: {
-		default: "Narak Leng - Full Stack Developer & Web Designer",
+		default: "Narak Leng",
 		template: "%s | Narak Leng",
 	},
 	description:
@@ -72,14 +72,6 @@ export const metadata: Metadata = {
 			"Narak Leng is a Full Stack Developer specializing in modern web development with React, Next.js, TypeScript, and Node.js. Explore my portfolio of innovative web applications and projects.",
 		url: "https://narak-portfolio.vercel.app",
 		siteName: "Narak Leng Portfolio",
-		images: [
-			{
-				url: "/images/narak-img-opengrah.svg",
-				width: 1200,
-				height: 630,
-				alt: "Narak Leng - Full Stack Developer Portfolio",
-			},
-		],
 		locale: "en_US",
 		type: "website",
 	},
@@ -88,7 +80,6 @@ export const metadata: Metadata = {
 		title: "Narak Leng - Full Stack Developer & Web Designer",
 		description:
 			"Narak Leng is a Full Stack Developer specializing in modern web development. Explore my portfolio of innovative projects.",
-		images: ["/images/narak-img-opengrah.svg"],
 		creator: "@narakleng",
 	},
 	robots: {
@@ -119,7 +110,7 @@ export default function RootLayout({
 		"@type": "Person",
 		name: "Narak Leng",
 		url: "https://narak-portfolio.vercel.app",
-		image: "https://narak-portfolio.vercel.app/images/narak-img-opengrah.svg",
+		image: "https://narak-portfolio.vercel.app/opengraph-image",
 		jobTitle: "Full Stack Developer",
 		description:
 			"Full Stack Developer specializing in modern web development with React, Next.js, TypeScript, and Node.js",

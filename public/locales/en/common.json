@@ -11,7 +11,16 @@
 		"description": "I am here.",
 		"webDevelopment": "WEB DEVELOPMENT ☻",
 		"education": "EDUCATION ✦",
-		"aboutMe": "ABOUT ME .☘︎ ݁˖"
+		"aboutMe": "ABOUT ME .☘︎ ݁˖",
+		"fallingText": "UX/UI Designer | Frontend Developer | Backend Developer | Graphic Designer | English Lecturer | ICT Lecturer",
+		"fallingTextHighlights": [
+			"UX/UI Designer",
+			"Frontend Developer",
+			"Backend Developer",
+			"Graphic Designer",
+			"English Lecturer",
+			"ICT Lecturer"
+		]
 	},
 	"about": {
 		"title": "Leng Narak",
