@@ -1,0 +1,11 @@
+# robots.txt for Narak Leng Portfolio
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://narak-portfolio.vercel.app/sitemap.xml

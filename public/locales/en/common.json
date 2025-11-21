@@ -1,0 +1,70 @@
+{
+	"nav": {
+		"home": "Home",
+		"about": "About",
+		"project": "Project",
+		"contact": "Contact"
+	},
+	"hero": {
+		"title": "Welcome",
+		"subtitle": "To My Portfolio",
+		"description": "I am here.",
+		"webDevelopment": "WEB DEVELOPMENT ☻",
+		"education": "EDUCATION ✦",
+		"aboutMe": "ABOUT ME .☘︎ ݁˖"
+	},
+	"about": {
+		"title": "Leng Narak",
+		"subtitle": "Full Stack Developer | UX/UI Designer | Educator",
+		"description": "A Full Stack Developer, UX/UI Designer, and Educator dedicated to creating innovative digital experiences and empowering others through technology and design"
+	},
+	"academicsBackground": {
+		"title": "Academic Background",
+		"subtitle": "Strong academic foundation in Information Technology and Design, combining technical expertise with creative problem-solving and a passion for continuous learning."
+	},
+	"technologyStack": {
+		"title": "Technology Stack",
+		"subtitle": "My technology stack reflects a balance between creativity and functionality, combining modern tools that empower me to build visually appealing and high-performing digital experiences",
+		"frontend": [
+			{
+				"title": "My Frontend Skills",
+				"subtitle": "Dive into my expertise in building responsive, interactive, and visually appealing web interfaces using modern technologies.",
+				"exploreMore": "Explore More"
+			}
+		],
+		"backend": [
+			{
+				"title": "My Backend Skills",
+				"subtitle": "Expertise in building robust, scalable server-side applications with modern backend technologies and security best practices.",
+				"exploreMore": "Explore More"
+			}
+		],
+		"additionalSkills": {
+			"title": "My Additional Skills"
+		}
+	},
+	"projectsDev": {
+		"title": "Let's Explore About My Development Projects First!",
+		"description": "some projects may only work depending on the server used, including school servers.",
+		"note": "Note",
+		"exploreMore": "Explore More Projects",
+		"exploreMoreProjects": "EXPLORE MY PROJECTS ✧˖°."
+	},
+	"projectsArt": {
+		"title": "Dive Into My Hobby 🎨",
+		"subtitle": "You Are Welcome To Discover",
+		"subtitle1": "I Enjoy Creating Art In My Free Time, some artworks are from my clients as well.",
+		"subtitleColorful": "More About My Hobbies Art",
+		"explore": "Explore My Art Portfolio"
+	},
+	"contact": {
+		"name": "Full Name",
+		"email": "Email",
+		"subject": "Subject",
+		"message": "Message",
+		"submit": "Send Message"
+	},
+	"footer": {
+		"copyright": "© 2025 Narak Portfolio. All rights reserved."
+	}
+}
