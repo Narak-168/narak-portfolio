@@ -75,7 +75,7 @@ export default function About() {
 						<AnimatedGradientText className='font-bold text-lg sm:text-xl md:text-2xl'>
 							{t("about.subtitle")}{" "}
 						</AnimatedGradientText>
-						<p className='text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed py-5'>
+						<p className='text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed py-5 max-w-2xl'>
 							{t("about.description")}
 						</p>
 						<div className='relative z-10 start-0 flex justify-start items-center gap-4'>

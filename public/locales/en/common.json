@@ -25,11 +25,11 @@
 	"about": {
 		"title": "Leng Narak",
 		"subtitle": "Full Stack Developer | UX/UI Designer | Educator",
-		"description": "A Full Stack Developer, UX/UI Designer, and Educator dedicated to creating innovative digital experiences and empowering others through technology and design"
+		"description": "As a Full Stack Developer, UX/UI Designer, and Teacher, I have extensive experience in creating various projects and in education. I am committed to developing innovative digital experiences and sharing knowledge with others through technology and my various work."
 	},
 	"academicsBackground": {
 		"title": "Academic Background",
-		"subtitle": "Strong academic foundation in Information Technology and Design, combining technical expertise with creative problem-solving and a passion for continuous learning."
+		"subtitle": "Having gone through several levels of study, including Information Technology, Design, and combined with soft skills that allow for effective and ethical problem-solving."
 	},
 	"technologyStack": {
 		"title": "Technology Stack",
@@ -74,6 +74,7 @@
 		"submit": "Send Message"
 	},
 	"footer": {
-		"copyright": "© 2025 Narak Portfolio. All rights reserved."
+		"copyright": "© 2025 Narak Portfolio.",
+		"allRightsReserved": "All rights reserved."
 	}
 }

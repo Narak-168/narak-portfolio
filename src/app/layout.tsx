@@ -1,7 +1,7 @@
 /** @format */
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Suwannaphum } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/src/components/theme-provider";
 import { NavbarWrapper } from "@/src/components/navbar-wrapper";
@@ -18,12 +18,7 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
-// Khmer font
-const suwannaphum = Suwannaphum({
-	variable: "--font-suwannaphum",
-	subsets: ["khmer"],
-	weight: ["400", "700"],
-});
+// Custom Khmer font is now loaded via @font-face in globals.css
 
 export const metadata: Metadata = {
 	title: {
@@ -144,7 +139,7 @@ export default function RootLayout({
 					/>
 				</head>
 				<body
-					className={`${geistSans.variable} ${geistMono.variable} ${suwannaphum.variable} antialiased`}>
+					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 					<TranslationProvider>
 						<ThemeProvider
 							attribute='class'

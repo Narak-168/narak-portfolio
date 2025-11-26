@@ -40,15 +40,19 @@ export default function SocialLinksPage() {
 		{
 			name: "FACEBOOK",
 			icon: SiFacebook,
-			url: "https://facebook.com/narakleng",
+			url: "https://www.facebook.com/share/1ZsK6N1HRU/?mibextid=wwXIfr",
 		},
 		{
 			name: "INSTAGRAM",
 			icon: SiInstagram,
-			url: "https://instagram.com/narakleng",
+			url: "https://www.instagram.com/lengnarak?igsh=MmNvMjBkNHVlemp1&utm_source=qr",
 		},
-		{ name: "TELEGRAM", icon: SiTelegram, url: "https://t.me/narakleng" },
-		{ name: "TIKTOK", icon: SiTiktok, url: "https://tiktok.com/@narakleng" },
+		{ name: "TELEGRAM", icon: SiTelegram, url: "https://t.me/Narak_Leng" },
+		{
+			name: "TIKTOK",
+			icon: SiTiktok,
+			url: "https://www.tiktok.com/@testing_user01?_r=1&_t=ZS-91a0Jg08njN",
+		},
 		{ name: "GITHUB", icon: SiGithub, url: "https://github.com/Narak-168" },
 	];
 
@@ -171,8 +175,11 @@ export default function SocialLinksPage() {
 					</div>
 				</div>
 			</div>
-			<div className='w-full py-4 sm:py-5 md:py-6 text-center text-xs sm:text-sm text-black font-medium bg-[#a7f175]'>
-				{t("footer.copyright")}
+			<div
+				className={`w-full py-4 sm:py-5 md:py-6 text-center text-xs sm:text-sm text-black font-medium bg-[#a7f175] ${
+					locale === "km" ? "font-khmer" : ""
+				}`}>
+				{t("footer.copyright")} {t("footer.allRightsReserved")}
 			</div>
 		</main>
 	);
