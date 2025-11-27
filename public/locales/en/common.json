@@ -66,6 +66,33 @@
 		"subtitleColorful": "More About My Hobbies Art",
 		"explore": "Explore My Art Portfolio"
 	},
+	"projectUXUI": {
+		"title": "My UX/UI Projects",
+		"subtitle": "If the projects couldn't view properly, it can be due to privacy settings.",
+		"viewDesign": "View Design",
+		"projects": [
+			{
+				"title": "exSTAD Project",
+				"description": "UX/UI Design & Product Design"
+			},
+			{
+				"title": "TASKIFY Project",
+				"description": "UX/UI Designer and Lead"
+			},
+			{
+				"title": "TechDeal Platform",
+				"description": "UX/UI Design & Frontend Development"
+			},
+			{
+				"title": "Dambaul-Mini Project",
+				"description": "UX/UI Designer and Development"
+			},
+			{
+				"title": "ACLEDA Clone",
+				"description": "UX/UI Clone Design & Prototype"
+			}
+		]
+	},
 	"contact": {
 		"name": "Full Name",
 		"email": "Email",

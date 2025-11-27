@@ -14,7 +14,7 @@ import {
 import type { ReactNode } from "react";
 
 type TranslationContextValue = {
-	t: (key: string) => string;
+	t: (key: string, options?: { returnObjects?: boolean }) => any;
 	locale: string;
 	changeLanguage: (newLocale: string) => Promise<void>;
 	mounted: boolean;
@@ -48,11 +48,14 @@ export function TranslationProvider({ children }: { children: ReactNode }) {
 	}, [loadTranslations]);
 
 	const t = useCallback(
-		(key: string) => {
+		(key: string, options?: { returnObjects?: boolean }) => {
 			const keys = key.split(".");
 			let translation: any = translations;
 			for (const k of keys) {
 				translation = translation?.[k];
+			}
+			if (options?.returnObjects && typeof translation === "object") {
+				return translation;
 			}
 			return translation || key;
 		},

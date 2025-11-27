@@ -66,6 +66,33 @@
 		"subtitleColorful": "បន្ថែមអំពីការងារសិល្បៈរបស់ខ្ញុំ",
 		"explore": "ស្វែងយល់ពីផតហ្វូលីយ៉ូសិល្បៈរបស់ខ្ញុំ"
 	},
+	"projectUXUI": {
+		"title": "គម្រោង UX/UI របស់ខ្ញុំ",
+		"subtitle": "ប្រសិនបើគម្រោងនានាមិនអាចមើលបានត្រឹមត្រូវទេ វាអាចបណ្ដាលមកពីការកំណត់ភាពឯកជន",
+		"viewDesign": "មើលការរចនា",
+		"projects": [
+			{
+				"title": "គម្រោង exSTAD",
+				"description": "ការរចនា UX/UI និងផលិតផល"
+			},
+			{
+				"title": "គម្រោង TASKIFY",
+				"description": "អ្នករចនា UX/UI និងអ្នកដឹកនាំ"
+			},
+			{
+				"title": "វេទិកា TechDeal",
+				"description": "ការរចនា UX/UI និងអភិវឌ្ឍន៍ Frontend"
+			},
+			{
+				"title": "គម្រោង Dambaul-Mini",
+				"description": "អ្នករចនា UX/UI និងអភិវឌ្ឍន៍"
+			},
+			{
+				"title": "ការក្លូន ACLEDA",
+				"description": "ការរចនាក្លូន UX/UI និង Prototype"
+			}
+		]
+	},
 	"contact": {
 		"name": "ឈ្មោះពេញ",
 		"email": "អ៊ីមែល",
