@@ -133,7 +133,7 @@ export default function ProjectPage() {
 							},
 							{
 								link: "https://www.figma.com/design/bYnXpMbnKL3VjhY43A792V/ACLEDA-Cloning-G02?node-id=0-1&t=mP9FQzIhSwEUCPC1-1",
-								image: "ACLEDA-ux_ui.svg",
+								image: "Acleda-ux_ui.svg",
 							},
 						].map((project, index) => {
 							const projectData = t(`projectUXUI.projects.${index}`, {
