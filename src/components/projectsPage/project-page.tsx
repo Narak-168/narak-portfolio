@@ -12,6 +12,7 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import CircularGallery from "@/components/CircularGallery";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ProjectPage() {
 	const { t } = useTranslation("common");
@@ -116,18 +117,23 @@ export default function ProjectPage() {
 						{[
 							{
 								link: "https://www.figma.com/design/yMUt0IWhuZurDVpXdERXHi/exSTAD?node-id=2890-56322&t=ZORtBD7i7Htec1Hz-1",
+								image: "exSTAD-ux_ui.svg",
 							},
 							{
 								link: "https://www.figma.com/design/2cUvQDg1h6YZFs2QQwxapX/Taskify-UI-UX?node-id=0-1&t=qfcOa5PRaIRnWIQw-1",
+								image: "TASKIFY-ux_ui.svg",
 							},
 							{
 								link: "https://www.figma.com/design/qqCQtagVQskj6os5rPMJY6/Final-Project?node-id=0-1&t=HJgUFt43UuEvazyI-1",
+								image: "TechDeal-ux_ui.svg",
 							},
 							{
 								link: "https://www.figma.com/design/Al9waELCy5mwDx8CjJiOAR/Dambaul-Mini-Project-Leng-Narak?node-id=1-49&t=Bv461p4E1AHM70rD-1",
+								image: "Dambul-ux_ui.svg",
 							},
 							{
 								link: "https://www.figma.com/design/bYnXpMbnKL3VjhY43A792V/ACLEDA-Cloning-G02?node-id=0-1&t=mP9FQzIhSwEUCPC1-1",
+								image: "ACLEDA-ux_ui.svg",
 							},
 						].map((project, index) => {
 							const projectData = t(`projectUXUI.projects.${index}`, {
@@ -166,6 +172,14 @@ export default function ProjectPage() {
 												)}
 										</p>
 									</div>
+									<Image
+										unoptimized
+										width={400}
+										height={300}
+										alt={projectData.title}
+										src={`/images/ux-uiCover/${project.image}`}
+										className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-36 object-cover opacity-20 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500 ease-out'
+									/>
 
 									{/* Button */}
 									<div className='absolute bottom-4 p-3'>
@@ -185,7 +199,7 @@ export default function ProjectPage() {
 				</div>
 
 				{/* Custom Scroll Indicator */}
-				<div className='flex justify-center gap-3 sm:pt-3 sm:pb-6 pt-6 pb-12 z-10 relative'>
+				<div className='flex justify-center gap-3 pt-6 pb-12 z-10 relative'>
 					{[0, 1, 2, 3].map((index) => (
 						<button
 							key={index}
