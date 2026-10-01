@@ -15,7 +15,7 @@ import {
 import type { MotionValue } from "motion/react";
 
 import { cn } from "@/lib/utils";
-import type { ScrollVelocityRowProps } from "@/src/types";
+import type { ScrollVelocityRowProps } from "@/types";
 
 export const wrap = (min: number, max: number, v: number) => {
 	const rangeSize = max - min;
@@ -23,7 +23,7 @@ export const wrap = (min: number, max: number, v: number) => {
 };
 
 const ScrollVelocityContext = React.createContext<MotionValue<number> | null>(
-	null
+	null,
 );
 
 export function ScrollVelocityContainer({

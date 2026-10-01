@@ -10,8 +10,18 @@ import {
 	useEffect,
 	useMemo,
 	useState,
+	useSyncExternalStore,
 } from "react";
 import type { ReactNode } from "react";
+import enTranslations from "../../public/locales/en/common.json";
+import kmTranslations from "../../public/locales/km/common.json";
+
+type TranslationDictionary = Record<string, unknown>;
+
+const dictionaries: Record<string, TranslationDictionary> = {
+	en: enTranslations as TranslationDictionary,
+	km: kmTranslations as TranslationDictionary,
+};
 
 type TranslationContextValue = {
 	t: (key: string, options?: { returnObjects?: boolean }) => any;
@@ -22,64 +32,100 @@ type TranslationContextValue = {
 
 const TranslationContext = createContext<TranslationContextValue | null>(null);
 
-export function TranslationProvider({ children }: { children: ReactNode }) {
-	const [locale, setLocale] = useState("en");
-	const [translations, setTranslations] = useState<Record<string, any>>({});
-	const [mounted, setMounted] = useState(false);
+function getInitialLocale(): string {
+	if (typeof window === "undefined") return "en";
+	try {
+		const saved = localStorage.getItem("preferredLanguage");
+		if (saved === "en" || saved === "km") return saved;
+	} catch {
+		// Ignore storage errors
+	}
+	return "en";
+}
 
-	const loadTranslations = useCallback(async (lang: string) => {
-		try {
-			const response = await fetch(`/locales/${lang}/common.json`);
-			const data = await response.json();
-			setTranslations(data);
-		} catch (error) {
-			console.error("Failed to load translations:", error);
-		}
-	}, []);
+const emptySubscribe = () => () => {};
+
+export function TranslationProvider({ children }: { children: ReactNode }) {
+	const [locale, setLocale] = useState<string>(getInitialLocale);
+	const mounted = useSyncExternalStore(
+		emptySubscribe,
+		() => true,
+		() => false,
+	);
 
 	useEffect(() => {
-		const initializeTranslations = async () => {
-			const savedLocale = localStorage.getItem("preferredLanguage") || "en";
-			setLocale(savedLocale);
-			await loadTranslations(savedLocale);
-			setMounted(true);
-		};
-		initializeTranslations();
-	}, [loadTranslations]);
+		if (typeof document !== "undefined") {
+			document.documentElement.lang = locale;
+			if (locale === "km") {
+				document.documentElement.classList.add("font-khmer");
+				document.body.classList.add("font-khmer");
+			} else {
+				document.documentElement.classList.remove("font-khmer");
+				document.body.classList.remove("font-khmer");
+			}
+		}
+	}, [locale]);
+
+	const changeLanguage = useCallback(async (newLocale: string) => {
+		try {
+			localStorage.setItem("preferredLanguage", newLocale);
+		} catch (e) {
+			console.warn("Could not save preferredLanguage to localStorage:", e);
+		}
+		setLocale(newLocale);
+	}, []);
 
 	const t = useCallback(
-		(key: string, options?: { returnObjects?: boolean }) => {
+		(key: string, options?: { returnObjects?: boolean }): any => {
 			const keys = key.split(".");
-			let translation: any = translations;
+			const currentDict = dictionaries[locale] || dictionaries.en;
+			let translation: unknown = currentDict;
+
 			for (const k of keys) {
-				translation = translation?.[k];
+				if (translation && typeof translation === "object") {
+					translation = (translation as Record<string, unknown>)[k];
+				} else {
+					translation = undefined;
+					break;
+				}
 			}
+
+			// Fallback to English if key is missing in Khmer
+			if (translation === undefined && locale !== "en") {
+				let fallback: unknown = dictionaries.en;
+				for (const k of keys) {
+					if (fallback && typeof fallback === "object") {
+						fallback = (fallback as Record<string, unknown>)[k];
+					} else {
+						fallback = undefined;
+						break;
+					}
+				}
+				translation = fallback;
+			}
+
 			if (options?.returnObjects && typeof translation === "object") {
 				return translation;
 			}
-			return translation || key;
-		},
-		[translations]
-	);
 
-	const changeLanguage = useCallback(
-		async (newLocale: string) => {
-			localStorage.setItem("preferredLanguage", newLocale);
-			setLocale(newLocale);
-			await loadTranslations(newLocale);
+			return (
+				typeof translation === "string" ? translation
+				: translation !== undefined ? String(translation)
+				: key
+			);
 		},
-		[loadTranslations]
+		[locale],
 	);
 
 	const value = useMemo(
 		() => ({ t, locale, changeLanguage, mounted }),
-		[t, locale, changeLanguage, mounted]
+		[t, locale, changeLanguage, mounted],
 	);
 
 	return createElement(TranslationContext.Provider, { value }, children);
 }
 
-export function useTranslation(p0: string) {
+export function useTranslation() {
 	const context = useContext(TranslationContext);
 	if (!context) {
 		throw new Error("useTranslation must be used within a TranslationProvider");

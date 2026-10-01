@@ -2,84 +2,40 @@
 
 "use client";
 
+import React from "react";
 import Link from "next/link";
-import { useTranslation } from "@/hooks/useTranslation";
-import { motion } from "motion/react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import FuzzyText from "@/components/ui/fuzzy-text";
+import { ArrowLeft, Sparkles } from "lucide-react";
+
 export default function NotFound() {
-	const { t, locale } = useTranslation("common");
-
 	return (
-		<div
-			className={`min-h-screen flex items-center justify-center px-4 bg-white dark:bg-black ${
-				locale === "km" ? "font-khmer" : ""
-			}`}>
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.6 }}
-				className='text-center space-y-8 max-w-2xl'>
-				{/* 404 Number with Fuzzy Effect */}
-				<motion.div
-					initial={{ scale: 0.8 }}
-					animate={{ scale: 1 }}
-					transition={{ duration: 0.5, delay: 0.2 }}
-					className='relative flex justify-center items-center'>
-					<FuzzyText
-						fontSize='clamp(100px, 20vw, 250px)'
-						fontWeight={800}
-						color='#a855f7'
-						enableHover={true}
-						baseIntensity={0.2}
-						hoverIntensity={0.6}>
-						404
-					</FuzzyText>
-				</motion.div>
+		<div className='min-h-screen flex items-center justify-center px-4 bg-neutral-50 dark:bg-[#09090b] text-neutral-900 dark:text-neutral-100'>
+			<div className='text-center space-y-6 max-w-md'>
+				<div className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'>
+					<Sparkles className='w-3 h-3' />
+					404 ERROR
+				</div>
 
-				{/* Message */}
-				<motion.div
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 0.5, delay: 0.4 }}
-					className='space-y-4'>
-					<h2 className='text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white'>
-						{locale === "km" ? "រកមិនឃើញទំព័រ" : "Page Not Found"}
-					</h2>
-					<p className='text-lg sm:text-xl text-gray-600 dark:text-gray-400'>
-						{locale === "km"
-							? "សូមអភ័យទោស ទំព័រដែលអ្នកកំពុងស្វែងរកមិនមាននៅទីនេះទេ"
-							: "Sorry, the page you are looking for doesn't exist or has been moved."}
-					</p>
-				</motion.div>
+				<h1 className='text-6xl sm:text-7xl font-extrabold tracking-tight text-zinc-900 dark:text-white font-mono'>
+					404
+				</h1>
 
-				{/* Back to Home Button */}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5, delay: 0.6 }}>
-					<Link href='/'>
-						<InteractiveHoverButton>
-							{locale === "km" ? "ត្រលប់ទៅទំព័រដើម" : "Back to Home"}
-						</InteractiveHoverButton>
+				<h2 className='text-2xl font-bold tracking-tight text-zinc-900 dark:text-white'>
+					Page Not Found
+				</h2>
+
+				<p className='text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed'>
+					The page you are looking for doesn&apos;t exist or has been moved.
+				</p>
+
+				<div className='pt-2'>
+					<Link
+						href='/'
+						className='inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-emerald-500 dark:text-zinc-950 dark:hover:bg-emerald-400 transition-colors shadow-xs'>
+						<ArrowLeft className='w-3.5 h-3.5' />
+						<span>Return Home</span>
 					</Link>
-				</motion.div>
-
-				{/* Decorative Elements */}
-				<motion.div
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 1, delay: 0.8 }}
-					className='flex justify-center gap-4 pt-8'>
-					<div className='w-2 h-2 rounded-full bg-purple-500 animate-bounce'></div>
-					<div
-						className='w-2 h-2 rounded-full bg-pink-500 animate-bounce'
-						style={{ animationDelay: "0.2s" }}></div>
-					<div
-						className='w-2 h-2 rounded-full bg-blue-500 animate-bounce'
-						style={{ animationDelay: "0.4s" }}></div>
-				</motion.div>
-			</motion.div>
+				</div>
+			</div>
 		</div>
 	);
 }

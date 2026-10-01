@@ -2,106 +2,369 @@
 	"nav": {
 		"home": "Home",
 		"about": "About",
-		"project": "Project",
-		"contact": "Contact"
+		"projects": "Projects",
+		"skills": "Skills",
+		"experience": "Experience",
+		"education": "Education",
+		"contact": "Contact",
+		"cv": "CV",
+		"downloadCV": "Download / View CV"
 	},
 	"hero": {
-		"title": "Welcome",
-		"subtitle": "To My Portfolio",
-		"description": "I am here.",
-		"webDevelopment": "WEB DEVELOPMENT ☻",
-		"education": "EDUCATION ✦",
-		"aboutMe": "ABOUT ME .☘︎ ݁˖",
-		"fallingText": "UX/UI Designer | Frontend Developer | Backend Developer | Graphic Designer | English Lecturer | ICT Lecturer",
-		"fallingTextHighlights": [
-			"UX/UI Designer",
-			"Frontend Developer",
-			"Backend Developer",
-			"Graphic Designer",
-			"English Lecturer",
-			"ICT Lecturer"
-		]
+		"status": "Open to new opportunities",
+		"location": "Phnom Penh, Cambodia",
+		"greeting": "Hello!!",
+		"imNarak": "I'm Narak,",
+		"imAFrontend": "I'm a Front-End",
+		"developer": "Developer.",
+		"intro": "IT graduate and Front-End Developer passionate about building responsive, user-friendly, and visually clean web experiences.",
+		"viewWork": "View My Work",
+		"downloadCV": "Download CV",
+		"coreStack": "Core Stack",
+		"frontendEngineer": "Front-end Engineer",
+		"cleanUISolidLogic": "Clean UI • Solid Logic",
+		"ruppDegree": "RUPP IT Eng.",
+		"verifiedDev": "Verified Developer"
 	},
 	"about": {
-		"title": "Leng Narak",
-		"subtitle": "Full Stack Developer | UX/UI Designer | Educator",
-		"description": "As a Full Stack Developer, UX/UI Designer, and Teacher, I have extensive experience in creating various projects and in education. I am committed to developing innovative digital experiences and sharing knowledge with others through technology and my various work."
+		"badge": "ABOUT ME",
+		"title": "Engineering User Experiences That Matter",
+		"bio": "Motivated IT graduate and Front-end Developer with hands-on experience in web development, UI/UX design, graphic design, and technical support. Experienced in building responsive and user-friendly web interfaces using modern front-end technologies. Currently working in HR while actively pursuing a career in Front-end Development.",
+		"statRupp": "Degree from RUPP",
+		"statProjects": "Featured Projects",
+		"statResponsive": "Responsive & Modern",
+		"statExperience": "Multi-domain Experience",
+		"expertiseTitle": "Core Areas of Expertise",
+		"hl1Title": "Front-end Development",
+		"hl1Desc": "Building reactive, accessible, high-performance web applications with React, Next.js, and TypeScript.",
+		"hl2Title": "UI/UX Design",
+		"hl2Desc": "Transforming complex workflows into clean, intuitive, and delightful digital user interfaces.",
+		"hl3Title": "Responsive Web Design",
+		"hl3Desc": "Crafting seamless cross-platform experiences optimized for mobile, tablet, and high-DPI desktop screens.",
+		"hl4Title": "Problem Solving",
+		"hl4Desc": "Analyzing complex data structures, debugging edge cases, and engineering clean, maintainable logic.",
+		"hl5Title": "User-focused Design",
+		"hl5Desc": "Prioritizing usability, accessibility standards, ergonomic interactions, and micro-animations.",
+		"hl6Title": "HR Core",
+		"hl6Desc": "Managing employee data validation, KPI analytics, organizational operations, and cross-functional team coordination with high accuracy."
 	},
-	"academicsBackground": {
-		"title": "Academic Background",
-		"subtitle": "Having gone through several levels of study, including Information Technology, Design, and combined with soft skills that allow for effective and ethical problem-solving."
-	},
-	"technologyStack": {
-		"title": "Technology Stack",
-		"subtitle": "My technology stack reflects a balance between creativity and functionality, combining modern tools that empower me to build visually appealing and high-performing digital experiences",
-		"frontend": [
-			{
-				"title": "My Frontend Skills",
-				"subtitle": "Dive into my expertise in building responsive, interactive, and visually appealing web interfaces using modern technologies.",
-				"exploreMore": "Explore More"
+	"projects": {
+		"badge": "FEATURED WORK",
+		"title": "Crafted With Purpose & Precision",
+		"subtitle": "A curated selection of web applications, full stack solutions, and UI/UX designs built with modern technologies.",
+		"filterAll": "All Projects",
+		"filterCoding": "Coding Projects",
+		"filterUxui": "UX/UI Projects",
+		"seeGithub": "See more repositories on GitHub",
+		"sourceCode": "GitHub",
+		"liveDemo": "Live Demo",
+		"details": "Details",
+		"modalOverview": "Overview",
+		"modalFeatures": "Key Features & Capabilities",
+		"modalTech": "Technologies & Tools",
+		"modalClose": "Press Esc to close",
+		"items": {
+			"exstad": {
+				"title": "exSTAD",
+				"category": "Education & Scholarship Platform",
+				"shortDescription": "A scholarship and education platform designed to provide information about programs, enrollment, scholars, and learning roadmaps.",
+				"longDescription": "exSTAD is a production-grade education platform built for the ISTAD ecosystem. It centralizes educational program offerings, online application workflows, scholar directories, and interactive skill learning roadmaps. Backed by Keycloak enterprise single-sign-on (SSO), it delivers secure authentication for students, teachers, and administrators.",
+				"features": [
+					"Enterprise Single Sign-On (SSO) integration using Keycloak",
+					"Interactive step-by-step curriculum and scholarship learning roadmaps",
+					"Comprehensive administrative dashboard for scholar enrollment approvals",
+					"Searchable scholar directory with profile showcase"
+				]
+			},
+			"taskify": {
+				"title": "Taskify",
+				"category": "Productivity & Kanban Board App",
+				"shortDescription": "A task management web application designed to help users create, organize, assign, and track tasks efficiently.",
+				"longDescription": "Taskify empowers agile teams and individual professionals to manage their projects effortlessly. Featuring visual Kanban drag-and-drop boards, customizable workflow stages, task priority flags, deadline reminders, and real-time team collaboration, it bridges the gap between clean UX and robust backend persistence.",
+				"features": [
+					"Interactive Kanban boards with smooth drag-and-drop mechanics",
+					"Real-time task filtering by tag, priority, and assigned team members",
+					"RESTful Spring Boot API backend backed by PostgreSQL persistence",
+					"Responsive interface built with Tailwind CSS and TypeScript safety"
+				]
+			},
+			"techdeal": {
+				"title": "TechDeal",
+				"category": "Tech E-Commerce & Marketplace",
+				"shortDescription": "A modern e-commerce web platform for browsing, comparing, and purchasing tech electronics and accessories with intuitive shopping cart flow.",
+				"longDescription": "TechDeal is an end-to-end tech gadgets marketplace developed with React and Spring Boot. It provides seamless catalog browsing, dynamic faceted filtering (brand, price, ratings), detailed product specs comparisons, real-time cart state management, and order checkout flows.",
+				"features": [
+					"Interactive catalog with multi-facet filters (category, brand, price)",
+					"Dynamic shopping cart with persistent storage and instant subtotal calculation",
+					"Detailed product pages with specification comparison matrices",
+					"RESTful Spring Boot API endpoints for catalog and order management"
+				]
+			},
+			"mobileApis": {
+				"title": "Mobile APIs | Spring Boot",
+				"category": "Backend RESTful APIs & Security",
+				"shortDescription": "High-performance backend RESTful APIs engineered with Spring Boot for mobile banking transactions and client account operations.",
+				"longDescription": "Engineered specifically for mobile banking client integration, Mobile APIs delivers a secure, production-tested stateless REST architecture. Features include role-based access control (RBAC), JWT authentication, transaction tracking, fund transfers, error handling middlewares, and interactive OpenAPI (Swagger) documentation.",
+				"features": [
+					"JWT token-based authentication and secure role-based endpoint authorization",
+					"Transactional banking endpoints for balance inquiry, deposits, and transfers",
+					"PostgreSQL relational schema with Hibernate/JPA repository layers",
+					"Interactive Swagger/OpenAPI documentation for smooth mobile client integration"
+				]
+			},
+			"productInventory": {
+				"title": "Product Inventory Management | Java",
+				"category": "Core Java CLI & Stock System",
+				"shortDescription": "A console-based inventory management system developed in Core Java featuring CRUD operations, table formatting, pagination, and stock tracking.",
+				"longDescription": "Engineered to master object-oriented programming principles and system design in Java, this console application provides a complete terminal-based solution for warehouse management. It features custom ASCII tabular rendering, pagination for large datasets, search by barcode/name, and persistent data storage.",
+				"features": [
+					"Interactive console-based menu with formatted ASCII table output",
+					"Full CRUD capabilities: create, read, update, delete, and restore products",
+					"In-memory pagination and fast search by ID, name, or product category",
+					"Robust input validation, exception handling, and persistent data storage"
+				]
+			},
+			"personalPortfolio": {
+				"title": "Personal Portfolio",
+				"category": "Portfolio & Interactive Showcase",
+				"shortDescription": "A responsive personal portfolio showcasing my development, UI/UX, and design work.",
+				"longDescription": "A developer portfolio crafted with an emphasis on minimalist aesthetics, subtle animations, typography hierarchy, and top-tier Lighthouse performance. Built with Next.js App Router, TypeScript, Tailwind CSS, and Motion, it features dynamic theme switching, bilingual Khmer/English support, interactive modal drawers, and responsive layouts across all viewports.",
+				"features": [
+					"Lightning-fast Next.js App Router with server-side metadata optimization",
+					"Bilingual Khmer (Krasar font) and English localization engine",
+					"Custom micro-interactions, scroll reveals, and smooth page transitions",
+					"Minimalist dark & light aesthetic with theme persistence"
+				]
+			},
+			"exstadUxui": {
+				"title": "exSTAD",
+				"category": "Education & Scholarship UI/UX",
+				"shortDescription": "Complete user interface and experience design for the exSTAD scholarship platform, featuring responsive dashboards and learning roadmaps.",
+				"longDescription": "The exSTAD UI/UX project was researched and crafted in Figma to solve real usability challenges faced by students applying for scholarships. The design delivers a modular design system, accessible color contrast ratios, clear stepper forms for application submissions, and interactive scholar roadmaps.",
+				"features": [
+					"Comprehensive Figma design system with tokens for typography, spacing, and colors",
+					"Multi-step scholarship application flow tested for minimal user drop-off",
+					"Interactive scholar roadmap interface with visual progress milestones",
+					"High-fidelity interactive prototypes for both desktop and mobile viewports"
+				]
+			},
+			"taskifyUxui": {
+				"title": "Taskify",
+				"category": "Productivity & Kanban Board UI/UX",
+				"shortDescription": "Ergonomic and minimalist UI/UX design for Taskify, emphasizing Kanban board visual clarity, dark mode aesthetics, and micro-interactions.",
+				"longDescription": "Designed in Figma with a focus on developer productivity and mental clarity. The interface reduces visual fatigue through clean neutral palettes with intentional accent states, smooth card grab-and-drag states, and quick-filter interaction drawers.",
+				"features": [
+					"Ergonomic Kanban board layout tailored for agile sprint planning",
+					"Complete light and dark mode variants crafted with WCAG accessibility standards",
+					"Micro-interaction specs for drag handles, modal overlays, and quick task cards",
+					"Component variant library in Figma with auto-layout and interactive states"
+				]
+			},
+			"techdealUxui": {
+				"title": "TechDeal",
+				"category": "Tech E-Commerce & Marketplace UI/UX",
+				"shortDescription": "Modern e-commerce UI/UX design engineered for high conversion rates, streamlined product discovery, and friction-free mobile checkout.",
+				"longDescription": "TechDeal's UI/UX architecture focuses on user engagement, effortless product comparison, and trustworthy checkout patterns. Crafted with extensive competitive benchmarking, the design features sticky action bars for mobile shoppers, clear technical spec breakdown tabs, and a 2-step checkout flow.",
+				"features": [
+					"Intuitive product discovery with multi-facet filters and comparative matrices",
+					"Frictionless 2-step checkout flow designed to minimize cart abandonment",
+					"Mobile-first responsive wireframes and high-fidelity interactive screens",
+					"Design system components with responsive grids and e-commerce UI tokens"
+				]
+			},
+			"dambaulUxui": {
+				"title": "Dambaul - Mini Project",
+				"category": "Rental & Accommodation App UI/UX",
+				"shortDescription": "A mobile application UI/UX mini project ('Dambaul') helping students and young workers easily find safe and budget-friendly rental rooms in Cambodia.",
+				"longDescription": "Dambaul (ដំបូល) was created as a focused UI/UX mini project addressing the lack of centralized housing information for university students relocating to Phnom Penh. The app design features localized map browsing, filter by price and university proximity, owner verification badges, and direct messaging.",
+				"features": [
+					"Map-centric room discovery with radius filtering around major universities",
+					"Transparent price breakdown including estimated utilities (water & electricity)",
+					"Trust badges and verified room photos to prevent rental scams",
+					"Bilingual Khmer-English interface with friendly typography and visual hierarchy"
+				]
+			},
+			"acledaUxui": {
+				"title": "ACLEDA UX/UI Clone",
+				"category": "FinTech & Mobile Banking Redesign",
+				"shortDescription": "A modern UX/UI redesign and clone of ACLEDA Mobile Banking app, enhancing navigation speed, QR scanning ergonomics, and bilingual readability.",
+				"longDescription": "A UX study and interface overhaul of Cambodia's prominent mobile banking application. The project restructured complex menu hierarchies into an accessible 4-tab navigation, gave KHQR scanning prominent thumb-reach placement, modernized transaction histories with smart categories, and refined Khmer typography.",
+				"features": [
+					"Modernized mobile banking dashboard with quick-balance privacy toggle",
+					"Ergonomic KHQR scan & pay workflow positioned for single-hand thumb reach",
+					"Streamlined fund transfer sequence with recipient avatars and instant confirmation",
+					"Refined Khmer font hierarchy and balanced contrast for both bright sunlight and dark environments"
+				]
+			},
+			"publicSchoolMis": {
+				"title": "Public School MIS — Mobile Screen",
+				"category": "Mobile-First EdTech UI/UX",
+				"shortDescription": "A mobile-first school management interface designed for Cambodian students and parents, focusing on attendance, homework, grades, schedules, and notifications.",
+				"longDescription": "Created to modernize public school communications and student tracking across Cambodia, Public School MIS offers a mobile-first interface optimized for everyday student and parent accessibility. Designed in Figma with native Khmer typography considerations, the system streamlines daily attendance tracking, homework distribution, real-time grading reports, timetable schedules, and school announcements.",
+				"features": [
+					"Mobile-first responsive design engineered for smartphone access and thumb ergonomics",
+					"Optimized Khmer typography (Krasar font) and bilingual layout structure",
+					"Visual student grade report cards, schedule timetables, and real-time attendance tracking",
+					"Complete Figma component design system with reusable UI tokens and interactive mobile screens"
+				]
 			}
-		],
-		"backend": [
-			{
-				"title": "My Backend Skills",
-				"subtitle": "Expertise in building robust, scalable server-side applications with modern backend technologies and security best practices.",
-				"exploreMore": "Explore More"
-			}
-		],
-		"additionalSkills": {
-			"title": "My Additional Skills"
 		}
 	},
-	"projectsDev": {
-		"title": "Let's Explore About My Development Projects First!",
-		"description": "some projects may only work depending on the server used, including school servers.",
-		"note": "Note",
-		"exploreMore": "Explore More Projects",
-		"exploreMoreProjects": "EXPLORE MY PROJECTS ✧˖°."
+	"skills": {
+		"badge": "MY SKILLS",
+		"title": "Technical Toolkit & Methodologies",
+		"subtitle": "Modern front-end frameworks, full stack architecture, designer tools, and product design processes.",
+		"all": "All Skills",
+		"frontend": "Front-end",
+		"backend": "Backend",
+		"tools": "Tools",
+		"uiux": "UI/UX",
+		"proficiency": "Proficiency",
+		"levels": {
+			"Advanced": "Advanced",
+			"Proficient": "Proficient",
+			"Intermediate": "Intermediate",
+			"Expert": "Expert"
+		}
 	},
-	"projectsArt": {
-		"title": "Dive Into My Hobby 🎨",
-		"subtitle": "You Are Welcome To Discover",
-		"subtitle1": "I Enjoy Creating Art In My Free Time, some artworks are from my clients as well.",
-		"subtitleColorful": "More About My Hobbies Art",
-		"explore": "Explore My Art Portfolio"
-	},
-	"projectUXUI": {
-		"title": "My UX/UI Projects",
-		"subtitle": "If the projects couldn't view properly, it can be due to privacy settings.",
-		"viewDesign": "View Design",
-		"projects": [
-			{
-				"title": "exSTAD Project",
-				"description": "UX/UI Design & Product Design"
+	"experience": {
+		"badge": "EXPERIENCE",
+		"title": "Professional Work History",
+		"subtitle": "Real-world organizational experience combining data operations, design systems, and digital support.",
+		"present": "Present",
+		"responsibilities": "Key Responsibilities & Deliverables",
+		"competencies": "Competencies:",
+		"items": {
+			"chipMong": {
+				"role": "Young Retailer – HR",
+				"company": "Chip Mong Retail | Chip Mong Supermarket",
+				"period": "2026 – Present",
+				"location": "Phnom Penh, Cambodia",
+				"responsibilities": [
+					"Managing and validating employee data across supermarket branches with high accuracy.",
+					"Preparing performance and KPI information to support strategic management decisions.",
+					"Working closely with HR documents, regulatory policies, and routine operational reports.",
+					"Supporting performance dashboards with structured data pipelines and automated spreadsheets.",
+					"Conducting systematic data cleaning and updating across enterprise human resource records.",
+					"Solving operational and data-related issues swiftly to ensure seamless branch workflows."
+				]
 			},
-			{
-				"title": "TASKIFY Project",
-				"description": "UX/UI Designer and Lead"
+			"wingBank": {
+				"role": "Employee Services & Graphic Design",
+				"company": "Wing Bank",
+				"period": "Previous Experience",
+				"location": "Phnom Penh, Cambodia",
+				"responsibilities": [
+					"Crafted engaging employee onboarding materials that streamlined new hire acclimation.",
+					"Designed internal communication visual assets, newsletters, and informational announcements.",
+					"Managed professional employee photo editing and standardized ID card production pipelines.",
+					"Delivered administrative and technical documentation support across human resource services.",
+					"Produced creative digital graphic design assets aligned with corporate brand guidelines.",
+					"Provided attentive employee service support resolving staff queries promptly."
+				]
 			},
-			{
-				"title": "TechDeal Platform",
-				"description": "UX/UI Design & Frontend Development"
-			},
-			{
-				"title": "Dambaul-Mini Project",
-				"description": "UX/UI Designer and Development"
-			},
-			{
-				"title": "ACLEDA Clone",
-				"description": "UX/UI Clone Design & Prototype"
+			"privateSchool": {
+				"role": "ICT Instructor",
+				"company": "Private School",
+				"period": "Previous Experience",
+				"location": "Phnom Penh, Cambodia",
+				"responsibilities": [
+					"Taught Information & Communication Technology (ICT) curriculum in English to students.",
+					"Supported students with hands-on technology education, computer literacy, and basic programming concepts.",
+					"Assisted school leadership with IT-related infrastructure activities, equipment setup, and software guidance.",
+					"Supported school marketing and digital content creation including event media and online promotions."
+				]
 			}
-		]
+		}
+	},
+	"journey": {
+		"badge": "CAREER & EDUCATION",
+		"title": "My Journey",
+		"subtitle": "A chronological timeline of my academic foundations, specialized technical training, and professional growth.",
+		"items": {
+			"course": {
+				"period": "2026",
+				"title": "UX/UI Short Course",
+				"institution": "DICHI Academy",
+				"badge": "Design Specialization",
+				"description": "Specialized intensive training in modern user interface design, user journey mapping, design systems, wireframing, and interactive prototyping with Figma.",
+				"highlights": [
+					"User research and usability testing methodologies",
+					"Design system creation and component tokens",
+					"High-fidelity interactive prototyping"
+				]
+			},
+			"istad": {
+				"period": "2024 – 2025",
+				"title": "Full Stack Web Development",
+				"institution": "Institute of Science and Technology Advanced Development (ISTAD)",
+				"badge": "Technical Training",
+				"description": "Comprehensive web development program specializing in modern front-end engineering with React and TypeScript, coupled with Spring Boot REST microservices and enterprise database management.",
+				"highlights": [
+					"React, TypeScript, Next.js, and Tailwind CSS development",
+					"Spring Boot, REST API, Keycloak IAM, and PostgreSQL",
+					"Agile teamwork, Git collaboration, and CI/CD basics"
+				]
+			},
+			"rupp": {
+				"period": "2019 – 2023",
+				"title": "Bachelor's Degree in Information Technology Engineering",
+				"institution": "Royal University of Phnom Penh (RUPP)",
+				"badge": "Bachelor of Engineering",
+				"description": "Comprehensive four-year engineering curriculum covering computer science fundamentals, software engineering principles, algorithms, data structures, and database systems.",
+				"highlights": [
+					"Core computer science and software development foundations",
+					"Network systems, relational databases, and system analysis",
+					"Graduated with practical capstone development projects"
+				]
+			}
+		}
 	},
 	"contact": {
-		"name": "Full Name",
-		"email": "Email",
-		"subject": "Subject",
+		"badge": "GET IN TOUCH",
+		"title": "Let's Talk",
+		"subtitle": "I'm always interested in new opportunities, interesting projects, and collaborations. Feel free to get in touch.",
+		"directEmail": "Direct Email",
+		"copy": "Copy",
+		"copied": "Copied!",
+		"onlineChannels": "Online Channels",
+		"responseBadge": "Active & responsive — typical turnaround within 24 hours.",
+		"name": "Your Name",
+		"namePlaceholder": "e.g. Sokha Chan",
+		"email": "Email Address",
+		"emailPlaceholder": "name@example.com",
 		"message": "Message",
-		"submit": "Send Message"
+		"messagePlaceholder": "Tell me about your project, idea, or opportunity...",
+		"submit": "Send Message",
+		"submitting": "Sending Message...",
+		"successTitle": "Message Sent Successfully!",
+		"successDesc": "Thank you for reaching out. I will review your message and get back to you promptly.",
+		"sendAnother": "Send Another Message",
+		"errors": {
+			"nameRequired": "Please enter your name.",
+			"nameShort": "Name must be at least 2 characters long.",
+			"emailRequired": "Please enter your email address.",
+			"emailInvalid": "Please enter a valid email address.",
+			"messageRequired": "Please enter your message.",
+			"messageShort": "Message must be at least 10 characters long."
+		}
 	},
 	"footer": {
-		"copyright": "© 2025 Narak Portfolio.",
-		"allRightsReserved": "All rights reserved."
+		"tagline": "Front-end Developer • UI/UX Enthusiast • Creative Developer",
+		"backToTop": "Back to top",
+		"copyright": "© 2026 Narak Leng. All rights reserved.",
+		"builtWith": "Built with Next.js, TypeScript & Tailwind CSS"
+	},
+	"cvModal": {
+		"title": "Curriculum Vitae — Narak Leng",
+		"printPdf": "Print / Save PDF",
+		"contact": "Contact",
+		"experience": "Professional Experience",
+		"education": "Education & Certifications",
+		"skills": "Core Skills & Technical Competencies",
+		"frontend": "Front-end & Styling",
+		"backend": "Backend & Architecture",
+		"uiux": "UI/UX & Design",
+		"tools": "Tools & Collaboration"
 	}
 }

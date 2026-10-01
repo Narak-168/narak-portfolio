@@ -1,7 +1,7 @@
 /** @format */
 
 import { cn } from "@/lib/utils";
-import { Marquee } from "../ui/marquee";
+import { Marquee } from "./marquee";
 import Image from "next/image";
 
 const artworks = [
@@ -49,7 +49,7 @@ const ArtworkCard = ({ img }: { img: string }) => {
 	return (
 		<figure
 			className={cn(
-				"relative h-74 w-74 shrink-0 cursor-pointer overflow-hidden border border-white/30 dark:border-white/20"
+				"relative h-74 w-74 shrink-0 cursor-pointer overflow-hidden border border-white/30 dark:border-white/20",
 			)}>
 			<Image
 				unoptimized

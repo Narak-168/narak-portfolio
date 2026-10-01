@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="842" height="595" viewBox="0 0 842 595" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="842" y2="595" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#090d16"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a7f175"/>
+      <stop offset="100%" stop-color="#3a7516"/>
+    </linearGradient>
+    <linearGradient id="redAccent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff5757"/>
+      <stop offset="100%" stop-color="#d63030"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="842" height="595" fill="url(#bgGrad)"/>
+
+  <!-- Ambient Glows -->
+  <circle cx="240" cy="200" r="180" fill="#a7f175" fill-opacity="0.12" filter="url(#glow)"/>
+  <circle cx="620" cy="380" r="160" fill="#ff5757" fill-opacity="0.10" filter="url(#glow)"/>
+
+  <!-- Grid decoration lines -->
+  <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+    <line x1="80" y1="0" x2="80" y2="595"/>
+    <line x1="200" y1="0" x2="200" y2="595"/>
+    <line x1="320" y1="0" x2="320" y2="595"/>
+    <line x1="440" y1="0" x2="440" y2="595"/>
+    <line x1="560" y1="0" x2="560" y2="595"/>
+    <line x1="680" y1="0" x2="680" y2="595"/>
+    <line x1="0" y1="120" x2="842" y2="120"/>
+    <line x1="0" y1="240" x2="842" y2="240"/>
+    <line x1="0" y1="360" x2="842" y2="360"/>
+    <line x1="0" y1="480" x2="842" y2="480"/>
+  </g>
+
+  <!-- Central Mobile Screen Device Frame -->
+  <g transform="translate(480, 85)">
+    <!-- Phone Shadow -->
+    <rect x="15" y="20" width="230" height="425" rx="36" fill="rgba(0,0,0,0.5)" filter="url(#glow)"/>
+    
+    <!-- Phone Outer Body -->
+    <rect x="0" y="0" width="240" height="430" rx="36" fill="#1e293b" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+    
+    <!-- Phone Screen -->
+    <rect x="10" y="10" width="220" height="410" rx="28" fill="#0f172a"/>
+
+    <!-- Dynamic Island / Notch -->
+    <rect x="80" y="18" width="80" height="14" rx="7" fill="#1e293b"/>
+
+    <!-- Screen Header -->
+    <rect x="24" y="46" width="100" height="10" rx="4" fill="#a7f175"/>
+    <rect x="24" y="62" width="60" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+    <circle cx="196" cy="54" r="14" fill="#ff5757" fill-opacity="0.2"/>
+    <circle cx="196" cy="54" r="6" fill="#ff5757"/>
+
+    <!-- Student Info Card -->
+    <rect x="24" y="85" width="192" height="70" rx="14" fill="#1e293b" stroke="rgba(167,241,117,0.3)" stroke-width="1"/>
+    <circle cx="50" cy="120" r="16" fill="url(#accentGrad)"/>
+    <rect x="76" y="106" width="75" height="8" rx="3" fill="#ffffff"/>
+    <rect x="76" y="120" width="105" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+    <rect x="76" y="132" width="45" height="5" rx="2" fill="#a7f175"/>
+
+    <!-- Attendance & Stats Grid -->
+    <g transform="translate(24, 168)">
+      <rect x="0" y="0" width="90" height="65" rx="12" fill="#1e293b"/>
+      <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="rgba(255,255,255,0.5)">ATTENDANCE</text>
+      <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20" font-weight="900" fill="#a7f175">98%</text>
+
+      <rect x="102" y="0" width="90" height="65" rx="12" fill="#1e293b"/>
+      <text x="116" y="24" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="rgba(255,255,255,0.5)">AVERAGE</text>
+      <text x="116" y="50" font-family="system-ui, sans-serif" font-size="20" font-weight="900" fill="#ff5757">A+</text>
+    </g>
+
+    <!-- Schedule / Subjects List Items -->
+    <g transform="translate(24, 246)">
+      <rect x="0" y="0" width="192" height="42" rx="10" fill="#1e293b"/>
+      <rect x="12" y="12" width="18" height="18" rx="5" fill="#a7f175" fill-opacity="0.2"/>
+      <rect x="40" y="13" width="70" height="7" rx="3" fill="#ffffff"/>
+      <rect x="40" y="24" width="50" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+      <text x="150" y="25" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" fill="#a7f175">08:00 AM</text>
+
+      <rect x="0" y="50" width="192" height="42" rx="10" fill="#1e293b"/>
+      <rect x="12" y="62" width="18" height="18" rx="5" fill="#ff5757" fill-opacity="0.2"/>
+      <rect x="40" y="63" width="80" height="7" rx="3" fill="#ffffff"/>
+      <rect x="40" y="74" width="60" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+      <text x="150" y="75" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" fill="#ff5757">10:00 AM</text>
+
+      <rect x="0" y="100" width="192" height="42" rx="10" fill="#1e293b"/>
+      <rect x="12" y="112" width="18" height="18" rx="5" fill="#a7f175" fill-opacity="0.2"/>
+      <rect x="40" y="113" width="65" height="7" rx="3" fill="#ffffff"/>
+      <rect x="40" y="124" width="45" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+      <text x="150" y="125" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" fill="#a7f175">02:00 PM</text>
+    </g>
+
+    <!-- Bottom Navigation Bar -->
+    <rect x="24" y="396" width="192" height="18" rx="9" fill="#1e293b"/>
+    <circle cx="50" cy="405" r="4" fill="#a7f175"/>
+    <circle cx="90" cy="405" r="4" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="150" cy="405" r="4" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="190" cy="405" r="4" fill="rgba(255,255,255,0.3)"/>
+  </g>
+
+  <!-- Left Content Branding -->
+  <g transform="translate(100, 160)">
+    <!-- Badge -->
+    <rect x="0" y="0" width="170" height="30" rx="15" fill="#1e293b" stroke="rgba(167,241,117,0.4)" stroke-width="1"/>
+    <circle cx="16" cy="15" r="5" fill="#a7f175"/>
+    <text x="30" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#a7f175" letter-spacing="1">MOBILE-FIRST EDTECH</text>
+
+    <!-- Project Title -->
+    <text x="0" y="80" font-family="system-ui, sans-serif" font-size="44" font-weight="900" fill="#ffffff" letter-spacing="-1">Public School</text>
+    <text x="0" y="132" font-family="system-ui, sans-serif" font-size="44" font-weight="900" fill="url(#accentGrad)" letter-spacing="-1">MIS — Mobile</text>
+
+    <!-- Subtitle / Description -->
+    <text x="0" y="180" font-family="system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.7)" font-weight="500">
+      <tspan x="0" dy="0">School management system mobile screens</tspan>
+      <tspan x="0" dy="24">designed for Cambodian students &amp; teachers.</tspan>
+    </text>
+
+    <!-- Feature Pills -->
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="95" height="28" rx="8" fill="#1e293b" stroke="rgba(255,255,255,0.1)"/>
+      <text x="14" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#ffffff">Figma UI/UX</text>
+
+      <rect x="105" y="0" width="110" height="28" rx="8" fill="#1e293b" stroke="rgba(255,255,255,0.1)"/>
+      <text x="119" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#ffffff">Mobile Screens</text>
+
+      <rect x="225" y="0" width="90" height="28" rx="8" fill="#ff5757" fill-opacity="0.15" stroke="rgba(255,87,87,0.3)"/>
+      <text x="238" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ff5757">Khmer UI</text>
+    </g>
+  </g>
+</svg>

@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Matter from "matter-js";
-import type { FallingTextProps } from "@/src/types";
+import type { FallingTextProps } from "@/types";
 
 const FallingText: React.FC<FallingTextProps> = ({
 	text = "",
@@ -45,7 +45,7 @@ const FallingText: React.FC<FallingTextProps> = ({
 		const newHTML = words
 			.map((word, index) => {
 				const isHighlighted = highlightWords.some(
-					(hw) => hw.trim() === word.trim()
+					(hw) => hw.trim() === word.trim(),
 				);
 				const colorClass = colorClasses[index % colorClasses.length];
 				return `<span
@@ -75,7 +75,7 @@ const FallingText: React.FC<FallingTextProps> = ({
 						observer.disconnect();
 					}
 				},
-				{ threshold: 0.1 }
+				{ threshold: 0.1 },
 			);
 			observer.observe(containerRef.current);
 			return () => observer.disconnect();
@@ -119,28 +119,28 @@ const FallingText: React.FC<FallingTextProps> = ({
 			height - 25,
 			width,
 			50,
-			boundaryOptions
+			boundaryOptions,
 		);
 		const leftWall = Bodies.rectangle(
 			-25,
 			height / 2,
 			50,
 			height,
-			boundaryOptions
+			boundaryOptions,
 		);
 		const rightWall = Bodies.rectangle(
 			width + 25,
 			height / 2,
 			50,
 			height,
-			boundaryOptions
+			boundaryOptions,
 		);
 		const ceiling = Bodies.rectangle(
 			width / 2,
 			-25,
 			width,
 			50,
-			boundaryOptions
+			boundaryOptions,
 		);
 
 		if (!textRef.current) return;

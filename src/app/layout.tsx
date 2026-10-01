@@ -1,11 +1,9 @@
 /** @format */
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/src/components/theme-provider";
-import { NavbarWrapper } from "@/src/components/navbar-wrapper";
-import Footer from "@/components/footer/social-links-page";
+import { ThemeProvider } from "@/components/layout/theme-provider";
 import { TranslationProvider } from "@/hooks/useTranslation";
 
 const geistSans = Geist({
@@ -13,36 +11,27 @@ const geistSans = Geist({
 	subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
-
-// Custom Khmer font is now loaded via @font-face in globals.css
-
 export const metadata: Metadata = {
 	title: {
-		default: "Narak Leng",
+		default: "Narak Leng | Front-end Developer",
 		template: "%s | Narak Leng",
 	},
 	description:
-		"Narak Leng is a Full Stack Developer specializing in modern web development with React, Next.js, TypeScript, and Node.js. Explore my portfolio of innovative web applications and projects.",
+		"Portfolio of Narak Leng, a Front-end Developer from Cambodia specializing in React, Next.js, TypeScript, UI/UX, and responsive web development.",
 	keywords: [
 		"Narak Leng",
-		"Full Stack Developer",
-		"Web Developer",
+		"Front-end Developer",
+		"Frontend Engineer",
 		"React Developer",
 		"Next.js Developer",
 		"TypeScript",
-		"Frontend Developer",
-		"Backend Developer",
+		"Tailwind CSS",
+		"UI/UX Design",
+		"Web Developer Cambodia",
+		"Phnom Penh Developer",
 		"Portfolio",
-		"Web Design",
-		"UI/UX",
-		"JavaScript",
-		"Node.js",
 	],
-	authors: [{ name: "Narak Leng", url: "https://narak-portfolio.vercel.app" }],
+	authors: [{ name: "Narak Leng", url: "https://narak.dev" }],
 	creator: "Narak Leng",
 	publisher: "Narak Leng",
 	formatDetection: {
@@ -51,47 +40,28 @@ export const metadata: Metadata = {
 		telephone: false,
 	},
 	icons: {
-		icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+		icon: [{ url: "/images/favicon.svg", type: "image/svg+xml" }],
 	},
-	metadataBase: new URL("https://narak-portfolio.vercel.app"),
-	alternates: {
-		canonical: "/",
-		languages: {
-			"en-US": "/en",
-			"km-KH": "/km",
-		},
-	},
+	metadataBase: new URL("https://narak.dev"),
 	openGraph: {
-		title: "Narak Leng - Full Stack Developer & Web Designer",
+		title: "Narak Leng | Front-end Developer",
 		description:
-			"Narak Leng is a Full Stack Developer specializing in modern web development with React, Next.js, TypeScript, and Node.js. Explore my portfolio of innovative web applications and projects.",
-		url: "https://narak-portfolio.vercel.app",
+			"Portfolio of Narak Leng, a Front-end Developer from Cambodia specializing in React, Next.js, TypeScript, UI/UX, and responsive web development.",
+		url: "https://narak.dev",
 		siteName: "Narak Leng Portfolio",
 		locale: "en_US",
 		type: "website",
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Narak Leng - Full Stack Developer & Web Designer",
+		title: "Narak Leng | Front-end Developer",
 		description:
-			"Narak Leng is a Full Stack Developer specializing in modern web development. Explore my portfolio of innovative projects.",
-		creator: "@narakleng",
+			"Portfolio of Narak Leng, a Front-end Developer from Cambodia specializing in React, Next.js, TypeScript, UI/UX, and responsive web development.",
+		creator: "@Narak-168",
 	},
 	robots: {
 		index: true,
 		follow: true,
-		googleBot: {
-			index: true,
-			follow: true,
-			"max-video-preview": -1,
-			"max-image-preview": "large",
-			"max-snippet": -1,
-		},
-	},
-	verification: {
-		google: "your-google-verification-code",
-		// yandex: "your-yandex-verification-code",
-		// yahoo: "your-yahoo-verification-code",
 	},
 };
 
@@ -104,16 +74,19 @@ export default function RootLayout({
 		"@context": "https://schema.org",
 		"@type": "Person",
 		name: "Narak Leng",
-		url: "https://narak-portfolio.vercel.app",
-		image: "https://narak-portfolio.vercel.app/opengraph-image",
-		jobTitle: "Full Stack Developer",
+		url: "https://narak.dev",
+		jobTitle: "Front-end Developer",
+		address: {
+			"@type": "PostalAddress",
+			addressLocality: "Phnom Penh",
+			addressCountry: "Cambodia",
+		},
 		description:
-			"Full Stack Developer specializing in modern web development with React, Next.js, TypeScript, and Node.js",
+			"Portfolio of Narak Leng, a Front-end Developer from Cambodia specializing in React, Next.js, TypeScript, UI/UX, and responsive web development.",
 		email: "narakleng168@gmail.com",
 		sameAs: [
 			"https://github.com/Narak-168",
-			"https://facebook.com/narakleng",
-			"https://instagram.com/narakleng",
+			"https://www.linkedin.com/in/narak-leng",
 			"https://t.me/narakleng",
 		],
 		knowsAbout: [
@@ -121,38 +94,33 @@ export default function RootLayout({
 			"Next.js",
 			"TypeScript",
 			"JavaScript",
-			"Node.js",
-			"Web Development",
+			"Tailwind CSS",
 			"Frontend Development",
-			"Backend Development",
 			"UI/UX Design",
+			"Responsive Web Design",
+			"Spring Boot",
+			"PostgreSQL",
 		],
 	};
 
 	return (
-		<>
-			<html lang='en' suppressHydrationWarning>
-				<head>
-					<script
-						type='application/ld+json'
-						dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-					/>
-				</head>
-				<body
-					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-					<TranslationProvider>
-						<ThemeProvider
-							attribute='class'
-							defaultTheme='system'
-							enableSystem
-							disableTransitionOnChange>
-							<NavbarWrapper />
-							<main>{children}</main>
-							<Footer />
-						</ThemeProvider>
-					</TranslationProvider>
-				</body>
-			</html>
-		</>
+		<html lang='en' suppressHydrationWarning className='scroll-smooth'>
+			<head>
+				<script
+					type='application/ld+json'
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				/>
+			</head>
+			<body
+				className={`${geistSans.variable} font-sans min-h-screen bg-neutral-50 dark:bg-[#09090b] text-neutral-900 dark:text-neutral-100 antialiased selection:bg-emerald-500/20 selection:text-emerald-400`}>
+				<ThemeProvider
+					attribute='class'
+					defaultTheme='dark'
+					enableSystem
+					disableTransitionOnChange>
+					<TranslationProvider>{children}</TranslationProvider>
+				</ThemeProvider>
+			</body>
+		</html>
 	);
 }

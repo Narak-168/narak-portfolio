@@ -24,8 +24,7 @@
     ],
     "paths": {
       "@/*": [
-        "./src/*",
-        "./*"
+        "./src/*"
       ]
     }
   },
@@ -34,12 +33,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "dev/types/**/*.ts",
-    "**/*.mts",
-    "dev/types/**/*.ts",
-    "dev/types/**/*.ts",
-    ".next\\dev/types/**/*.ts",
-    ".next\\dev/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [

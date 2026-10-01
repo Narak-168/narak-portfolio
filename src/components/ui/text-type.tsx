@@ -12,7 +12,7 @@ import {
 	useCallback,
 } from "react";
 import { gsap } from "gsap";
-import type { TextTypeProps } from "@/src/types";
+import type { TextTypeProps } from "@/types";
 
 const TextType = ({
 	text,
@@ -45,7 +45,7 @@ const TextType = ({
 
 	const textArray = useMemo(
 		() => (Array.isArray(text) ? text : [text]),
-		[text]
+		[text],
 	);
 
 	const getRandomSpeed = useCallback(() => {
@@ -70,7 +70,7 @@ const TextType = ({
 					}
 				});
 			},
-			{ threshold: 0.1 }
+			{ threshold: 0.1 },
 		);
 
 		observer.observe(containerRef.current);
@@ -96,9 +96,8 @@ const TextType = ({
 		let timeout: NodeJS.Timeout;
 
 		const currentText = textArray[currentTextIndex];
-		const processedText = reverseMode
-			? currentText.split("").reverse().join("")
-			: currentText;
+		const processedText =
+			reverseMode ? currentText.split("").reverse().join("") : currentText;
 
 		const executeTypingAnimation = () => {
 			if (isDeleting) {
@@ -125,11 +124,11 @@ const TextType = ({
 					timeout = setTimeout(
 						() => {
 							setDisplayedText(
-								(prev) => prev + processedText[currentCharIndex]
+								(prev) => prev + processedText[currentCharIndex],
 							);
 							setCurrentCharIndex((prev) => prev + 1);
 						},
-						variableSpeed ? getRandomSpeed() : typingSpeed
+						variableSpeed ? getRandomSpeed() : typingSpeed,
 					);
 				} else if (textArray.length > 1) {
 					timeout = setTimeout(() => {
@@ -192,7 +191,7 @@ const TextType = ({
 				}>
 				{cursorCharacter}
 			</span>
-		)
+		),
 	);
 };
 

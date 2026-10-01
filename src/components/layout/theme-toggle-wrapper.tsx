@@ -3,15 +3,16 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
 
-interface ThemeToggleWrapperProps
-	extends React.ComponentPropsWithoutRef<"button"> {
+interface ThemeToggleWrapperProps extends React.ComponentPropsWithoutRef<"button"> {
 	duration?: number;
 }
+
+const emptySubscribe = () => () => {};
 
 export const ThemeToggleWrapper = ({
 	className,
@@ -19,12 +20,12 @@ export const ThemeToggleWrapper = ({
 	...props
 }: ThemeToggleWrapperProps) => {
 	const { theme, setTheme } = useTheme();
-	const [mounted, setMounted] = useState(false);
+	const mounted = useSyncExternalStore(
+		emptySubscribe,
+		() => true,
+		() => false,
+	);
 	const buttonRef = useRef<HTMLButtonElement>(null);
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
 
 	const isDark = theme === "dark";
 
@@ -62,7 +63,7 @@ export const ThemeToggleWrapper = ({
 				duration,
 				easing: "ease-in-out",
 				pseudoElement: "::view-transition-new(root)",
-			}
+			},
 		);
 	}, [isDark, setTheme, duration, mounted]);
 
@@ -71,7 +72,7 @@ export const ThemeToggleWrapper = ({
 			<button
 				className={cn(
 					"relative flex h-9 w-9 items-center justify-center rounded-full bg-white text-neutral-950 transition-colors hover:bg-neutral-50 dark:bg-neutral-950 dark:text-neutral-50 dark:hover:bg-neutral-900",
-					className
+					className,
 				)}
 				disabled
 				{...props}>
@@ -85,8 +86,8 @@ export const ThemeToggleWrapper = ({
 			ref={buttonRef}
 			onClick={toggleTheme}
 			className={cn(
-				"relative flex h-9 w-9 items-center justify-center rounded-full bg-white text-neutral-950 transition-colors hover:bg-neutral-50 dark:bg-neutral-950 dark:text-neutral-50 dark:hover:bg-neutral-900",
-				className
+				"relative flex h-9 w-9 items-center justify-center rounded-full bg-white text-neutral-950 transition-colors hover:bg-neutral-50 dark:bg-neutral-950 dark:text-neutral-50 dark:hover:bg-neutral-900 border border-zinc-200 dark:border-zinc-800 hover:border-brand-green/60 dark:hover:border-brand-green/60",
+				className,
 			)}
 			aria-label='Toggle theme'
 			{...props}>
@@ -94,10 +95,10 @@ export const ThemeToggleWrapper = ({
 				size={16}
 				strokeWidth={2}
 				className={cn(
-					"absolute transition-all",
-					isDark
-						? "rotate-90 scale-0 opacity-0"
-						: "rotate-0 scale-100 opacity-100"
+					"absolute transition-all text-[rgb(255,87,87)]",
+					isDark ?
+						"rotate-90 scale-0 opacity-0"
+					:	"rotate-0 scale-100 opacity-100",
 				)}
 				aria-hidden='true'
 			/>
@@ -105,10 +106,10 @@ export const ThemeToggleWrapper = ({
 				size={16}
 				strokeWidth={2}
 				className={cn(
-					"absolute transition-all",
-					isDark
-						? "rotate-0 scale-100 opacity-100"
-						: "rotate-90 scale-0 opacity-0"
+					"absolute transition-all text-[rgb(167,241,117)]",
+					isDark ?
+						"rotate-0 scale-100 opacity-100"
+					:	"rotate-90 scale-0 opacity-0",
 				)}
 				aria-hidden='true'
 			/>

@@ -2,9 +2,7 @@
 
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-
-export const alt = "Narak Leng - Full Stack Developer Portfolio";
+export const alt = "Narak Leng - Front-end Developer & UI/UX Designer";
 export const size = {
 	width: 1200,
 	height: 630,
@@ -18,7 +16,7 @@ export default async function Image() {
 			<div
 				style={{
 					fontSize: 60,
-					background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+					background: "linear-gradient(135deg, #0a0a0a 0%, #171717 50%, #09090b 100%)",
 					width: "100%",
 					height: "100%",
 					display: "flex",
@@ -28,6 +26,7 @@ export default async function Image() {
 					color: "white",
 					fontFamily: "system-ui, sans-serif",
 					padding: "40px",
+					position: "relative",
 				}}>
 				<div
 					style={{
@@ -52,19 +51,19 @@ export default async function Image() {
 							fontSize: 40,
 							fontWeight: 600,
 							margin: 0,
-							opacity: 0.95,
+							color: "#a7f175",
 						}}>
-						Full Stack Developer
+						Front-end Developer & UI/UX Designer
 					</p>
 					<p
 						style={{
-							fontSize: 32,
+							fontSize: 30,
 							fontWeight: 400,
 							margin: 0,
 							marginTop: 20,
-							opacity: 0.9,
+							opacity: 0.85,
 						}}>
-						React • Next.js • TypeScript • Node.js
+						React • Next.js • TypeScript • Tailwind CSS • Figma
 					</p>
 				</div>
 			</div>

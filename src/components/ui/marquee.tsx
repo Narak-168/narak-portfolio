@@ -1,9 +1,7 @@
 /** @format */
 
-import { ComponentPropsWithoutRef } from "react";
-
 import { cn } from "@/lib/utils";
-import type { MarqueeProps } from "@/src/types";
+import type { MarqueeProps } from "@/types";
 
 export function Marquee({
 	className,
@@ -23,7 +21,7 @@ export function Marquee({
 					"flex-row": !vertical,
 					"flex-col": vertical,
 				},
-				className
+				className,
 			)}>
 			{Array(repeat)
 				.fill(0)
