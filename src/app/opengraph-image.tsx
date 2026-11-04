@@ -51,7 +51,7 @@ export default async function Image() {
 							fontSize: 40,
 							fontWeight: 600,
 							margin: 0,
-							color: "#a7f175",
+							color: "#2997ff",
 						}}>
 						Front-end Developer & UI/UX Designer
 					</p>

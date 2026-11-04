@@ -8,7 +8,7 @@ import { personalInfo } from "@/data/portfolio-data";
 import { ThemeToggleWrapper } from "./theme-toggle-wrapper";
 import { LanguageToggle } from "./language-toggle";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Menu, X, FileText, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface NavbarProps {
@@ -27,14 +27,11 @@ const navLinks = [
 
 export function Navbar({ onOpenCV }: NavbarProps) {
 	const [activeSection, setActiveSection] = useState("home");
-	const [isScrolled, setIsScrolled] = useState(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const { t } = useTranslation();
 
 	useEffect(() => {
 		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 20);
-
 			const sections = navLinks.map((link) => link.href.substring(1));
 			const scrollPosition = window.scrollY + 120;
 
@@ -52,32 +49,37 @@ export function Navbar({ onOpenCV }: NavbarProps) {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
+	// Lock page scroll while the full-screen mobile menu is open
+	useEffect(() => {
+		document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [mobileMenuOpen]);
+
 	return (
-		<header
-			className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-				isScrolled ?
-					"py-3 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800/80 shadow-xs"
-				:	"py-5 bg-transparent"
-			}`}>
-			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
-				<div className='flex items-center justify-between'>
+		<header className='fixed top-0 inset-x-0 z-40'>
+			{/* Global Nav Bar */}
+			<div className='relative z-10 bg-[rgba(251,251,253,0.8)] dark:bg-[rgba(22,22,23,0.8)] backdrop-blur-xl backdrop-saturate-[1.8]'>
+				<div className='max-w-5xl mx-auto h-12 px-4 sm:px-6 flex items-center justify-between gap-4'>
 					{/* Logo / Brand */}
 					<a
 						href='#home'
-						className='group flex items-center gap-2.5 font-bold tracking-tight text-zinc-900 dark:text-white transition-opacity hover:opacity-90'>
+						aria-label='Go to homepage'
+						className='flex items-center opacity-90 hover:opacity-100 transition-opacity'>
 						<Image
 							src='/images/favicon.svg'
 							alt={personalInfo.name}
-							width={48}
-							height={48}
-							className='h-12 w-12 object-cover'
+							width={28}
+							height={28}
+							className='h-7 w-7 object-cover rounded-lg'
 							priority
 						/>
 					</a>
 
 					{/* Desktop Navigation Links */}
 					<nav
-						className='hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full bg-zinc-100/70 dark:bg-zinc-900/70 border border-zinc-200/70 dark:border-zinc-800/70 backdrop-blur-xs'
+						className='hidden lg:flex flex-1 items-center justify-center gap-7'
 						aria-label='Main Navigation'>
 						{navLinks.map((link) => {
 							const isActive = activeSection === link.href.substring(1);
@@ -85,96 +87,74 @@ export function Navbar({ onOpenCV }: NavbarProps) {
 								<a
 									key={link.key}
 									href={link.href}
-									className={`relative px-3.5 py-1.5 text-xs font-medium rounded-full transition-colors ${
+									className={`text-xs transition-colors ${
 										isActive ?
-											"text-zinc-900 dark:text-white font-semibold"
-										:	"text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+											"text-[#1d1d1f] dark:text-white font-medium"
+										:	"text-[#1d1d1f]/70 hover:text-[#1d1d1f] dark:text-[#f5f5f7]/70 dark:hover:text-white"
 									}`}>
 									{t(link.key)}
-									{isActive && (
-										<motion.span
-											layoutId='activeNavPill'
-											className='absolute inset-0 rounded-full bg-white dark:bg-zinc-800 -z-10 shadow-xs border border-zinc-200/60 dark:border-zinc-700/60'
-											transition={{
-												type: "spring",
-												stiffness: 350,
-												damping: 30,
-											}}
-										/>
-									)}
 								</a>
 							);
 						})}
 					</nav>
 
-					{/* Right Side: Language Toggle, Theme Toggle & CV Button */}
-					<div className='hidden md:flex items-center gap-2.5'>
-						<LanguageToggle />
+					{/* Right Side Controls */}
+					<div className='flex items-center gap-1.5 sm:gap-2'>
+						<LanguageToggle className='hidden sm:inline-flex' />
 						<ThemeToggleWrapper />
 						<button
 							onClick={onOpenCV}
-							className='inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-medium bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white transition-all shadow-xs hover:scale-[1.02] active:scale-[0.98] cursor-pointer'>
-							<FileText className='w-3.5 h-3.5' />
-							<span>{t("nav.cv")}</span>
+							className='px-3 py-1 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-medium transition-colors cursor-pointer'>
+							{t("nav.cv")}
 						</button>
-					</div>
-
-					{/* Mobile Menu & Controls */}
-					<div className='flex items-center gap-2 md:hidden'>
-						<LanguageToggle />
-						<ThemeToggleWrapper />
 						<button
 							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-							className='flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors'
-							aria-label='Toggle menu'
+							className='lg:hidden flex h-8 w-8 items-center justify-center rounded-full text-[#1d1d1f] dark:text-[#f5f5f7] hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer'
+							aria-label='Toggle navigation menu'
 							aria-expanded={mobileMenuOpen}>
 							{mobileMenuOpen ?
-								<X className='w-5 h-5' />
-							:	<Menu className='w-5 h-5' />}
+								<X className='w-[18px] h-[18px]' />
+							:	<Menu className='w-[18px] h-[18px]' />}
 						</button>
 					</div>
 				</div>
 			</div>
 
-			{/* Mobile Drawer Menu */}
+			{/* Full-screen Mobile Menu */}
 			<AnimatePresence>
 				{mobileMenuOpen && (
 					<motion.div
-						initial={{ opacity: 0, height: 0 }}
-						animate={{ opacity: 1, height: "auto" }}
-						exit={{ opacity: 0, height: 0 }}
-						transition={{ duration: 0.2 }}
-						className='md:hidden overflow-hidden bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 shadow-xl'>
-						<div className='max-w-6xl mx-auto px-6 py-5 flex flex-col gap-2'>
-							{navLinks.map((link) => {
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.25 }}
+						className='lg:hidden fixed inset-0 top-12 bg-white dark:bg-black overflow-y-auto'>
+						<nav
+							className='max-w-5xl mx-auto px-8 sm:px-12 pt-8 pb-12 flex flex-col gap-1'
+							aria-label='Mobile Navigation'>
+							{navLinks.map((link, idx) => {
 								const isActive = activeSection === link.href.substring(1);
 								return (
-									<a
+									<motion.a
 										key={link.key}
 										href={link.href}
 										onClick={() => setMobileMenuOpen(false)}
-										className={`flex items-center justify-between py-2.5 px-3 rounded-lg text-sm font-medium transition-colors ${
+										initial={{ opacity: 0, y: -8 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ delay: 0.04 * idx, duration: 0.3 }}
+										className={`py-2 text-[28px] font-semibold tracking-[-0.02em] transition-colors ${
 											isActive ?
-												"bg-brand-green/15 dark:bg-brand-green/10 text-[rgb(58,117,22)] dark:text-[hsl(96,82%,70%)] font-semibold"
-											:	"text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900/60 hover:text-zinc-900 dark:hover:text-white"
+												"text-[#1d1d1f] dark:text-white"
+											:	"text-[#1d1d1f]/60 hover:text-[#1d1d1f] dark:text-[#f5f5f7]/60 dark:hover:text-white"
 										}`}>
-										<span>{t(link.key)}</span>
-										<ArrowUpRight className='w-3.5 h-3.5 opacity-60' />
-									</a>
+										{t(link.key)}
+									</motion.a>
 								);
 							})}
-							<div className='pt-3 mt-1 border-t border-zinc-100 dark:border-zinc-800 flex flex-col gap-2'>
-								<button
-									onClick={() => {
-										setMobileMenuOpen(false);
-										onOpenCV();
-									}}
-									className='w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold bg-[rgb(167,241,117)] text-zinc-950 hover:bg-[#96e062] transition-colors cursor-pointer'>
-									<FileText className='w-4 h-4 text-[rgb(255,87,87)]' />
-									<span>{t("nav.downloadCV")}</span>
-								</button>
+							<div className='sm:hidden mt-8'>
+								<LanguageToggle />
 							</div>
-						</div>
+						</nav>
 					</motion.div>
 				)}
 			</AnimatePresence>

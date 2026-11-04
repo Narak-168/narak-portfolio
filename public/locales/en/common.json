@@ -14,20 +14,16 @@
 		"status": "Open to new opportunities",
 		"location": "Phnom Penh, Cambodia",
 		"greeting": "Hello!!",
-		"imNarak": "I'm Narak,",
-		"imAFrontend": "I'm a Front-End",
+		"im": "I'm",
+		"name": "Narak,",
+		"role": "Front-End",
 		"developer": "Developer.",
 		"intro": "IT graduate and Front-End Developer passionate about building responsive, user-friendly, and visually clean web experiences.",
 		"viewWork": "View My Work",
-		"downloadCV": "Download CV",
-		"coreStack": "Core Stack",
-		"frontendEngineer": "Front-end Engineer",
-		"cleanUISolidLogic": "Clean UI • Solid Logic",
-		"ruppDegree": "RUPP IT Eng.",
-		"verifiedDev": "Verified Developer"
+		"downloadCV": "Download CV"
 	},
 	"about": {
-		"badge": "ABOUT ME",
+		"badge": "About me",
 		"title": "Engineering User Experiences That Matter",
 		"bio": "Motivated IT graduate and Front-end Developer with hands-on experience in web development, UI/UX design, graphic design, and technical support. Experienced in building responsive and user-friendly web interfaces using modern front-end technologies. Currently working in HR while actively pursuing a career in Front-end Development.",
 		"statRupp": "Degree from RUPP",
@@ -46,7 +42,10 @@
 		"hl5Title": "User-focused Design",
 		"hl5Desc": "Prioritizing usability, accessibility standards, ergonomic interactions, and micro-animations.",
 		"hl6Title": "HR Core",
-		"hl6Desc": "Managing employee data validation, KPI analytics, organizational operations, and cross-functional team coordination with high accuracy."
+		"hl6Desc": "Managing employee data validation, KPI analytics, organizational operations, and cross-functional team coordination with high accuracy.",
+		"summaryTitle": "IT graduate crafting clean, responsive web experiences.",
+		"summaryText": "Front-End Developer and UI/UX designer in Phnom Penh, with hands-on experience across web, design and IT support.",
+		"cta": "Let’s work together"
 	},
 	"projects": {
 		"badge": "FEATURED WORK",
@@ -208,6 +207,18 @@
 					"Complete Figma component design system with reusable UI tokens and interactive mobile screens"
 				]
 			}
+		},
+		"filterArtwork": "Artwork",
+		"artworkCategory": "Poster Design",
+		"artworkView": "View poster",
+		"artworkClose": "Close",
+		"artworks": {
+			"anniversary": "1st Anniversary Celebration",
+			"luckyDraw": "Anniversary Lucky Draw",
+			"summerCamp": "Day Care Summer Camp",
+			"waterFestival": "Water Festival",
+			"coronationDay": "King’s Coronation Day",
+			"queenMotherBirthday": "Queen Mother’s Birthday"
 		}
 	},
 	"skills": {
@@ -235,10 +246,24 @@
 		"responsibilities": "Key Responsibilities & Deliverables",
 		"competencies": "Competencies:",
 		"items": {
+			"demoq": {
+				"role": "IT Support & Web Development Intern",
+				"company": "DemoQ (Cambodia) Co., Ltd.",
+				"period": "Oct 2026 – Present",
+				"location": "Phnom Penh, Cambodia",
+				"responsibilities": [
+					"Managing user accounts, permissions and licences across Microsoft 365 and internal business systems.",
+					"Providing first-line IT support for laptops, printers, network, email, Teams and SharePoint/OneDrive, escalating to vendors when needed.",
+					"Preparing and handing over new devices, patching operating systems and software, and keeping the hardware and licence asset register up to date.",
+					"Building and updating pages and components for demoq.com.kh with HTML, CSS and JavaScript, turning Creative team designs into responsive layouts.",
+					"Monitoring website uptime, speed, SEO and analytics, and handling CMS updates, backups, and domain, SSL and hosting renewals.",
+					"Administering FlowyTeam (users, roles, OKRs/KPIs, workflows and dashboards) and training staff with Khmer and English quick-reference guides."
+				]
+			},
 			"chipMong": {
 				"role": "Young Retailer – HR",
 				"company": "Chip Mong Retail | Chip Mong Supermarket",
-				"period": "2026 – Present",
+				"period": "Previous Experience",
 				"location": "Phnom Penh, Cambodia",
 				"responsibilities": [
 					"Managing and validating employee data across supermarket branches with high accuracy.",
@@ -347,13 +372,15 @@
 			"emailInvalid": "Please enter a valid email address.",
 			"messageRequired": "Please enter your message.",
 			"messageShort": "Message must be at least 10 characters long."
-		}
+		},
+		"formTitle": "Send a message"
 	},
 	"footer": {
 		"tagline": "Front-end Developer • UI/UX Enthusiast • Creative Developer",
 		"backToTop": "Back to top",
 		"copyright": "© 2026 Narak Leng. All rights reserved.",
-		"builtWith": "Built with Next.js, TypeScript & Tailwind CSS"
+		"builtWith": "Built with Next.js, TypeScript & Tailwind CSS",
+		"version": "Version"
 	},
 	"cvModal": {
 		"title": "Curriculum Vitae — Narak Leng",

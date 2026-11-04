@@ -63,32 +63,36 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
 					animate={{ opacity: 1, scale: 1, y: 0 }}
 					exit={{ opacity: 0, scale: 0.95, y: 20 }}
 					transition={{ duration: 0.2, ease: "easeOut" }}
-					className='relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl z-10 custom-scrollbar'>
-					{/* Modal Action Bar */}
-					<div className='sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800'>
-						<div className='flex items-center gap-2'>
-							<span className='h-2.5 w-2.5 rounded-full bg-[rgb(255,87,87)] animate-pulse' />
-							<h3 className='font-semibold text-zinc-900 dark:text-zinc-100 text-sm sm:text-base'>
+					className='relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-[30px] bg-white dark:bg-[#161617] border border-black/10 dark:border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.5)] z-10 custom-scrollbar'>
+					{/* Modal Action Bar - macOS Window Header */}
+					<div className='sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-white/80 dark:bg-[#161617]/85 backdrop-blur-2xl border-b border-black/5 dark:border-white/10'>
+						<div className='flex items-center gap-3'>
+							<div className='flex items-center gap-1.5'>
+								<span className='h-3 w-3 rounded-full bg-[#ff5f56] border border-[#e0443e]/40 shadow-xs' />
+								<span className='h-3 w-3 rounded-full bg-[#ffbd2e] border border-[#dea123]/40 shadow-xs' />
+								<span className='h-3 w-3 rounded-full bg-[#27c93f] border border-[#1aab29]/40 shadow-xs' />
+							</div>
+							<h3 className='font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] text-xs sm:text-sm tracking-tight ml-1'>
 								Curriculum Vitae — Narak Leng
 							</h3>
 						</div>
 						<div className='flex items-center gap-2'>
 							<button
 								onClick={handlePrint}
-								className='inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 transition-colors'
+								className='inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 text-[#1d1d1f] dark:text-[#f5f5f7] transition-colors border border-black/5 dark:border-white/10'
 								title='Print CV'>
 								<Printer className='w-3.5 h-3.5' />
-								<span className='hidden sm:inline'>Print / Save PDF</span>
+								<span className='hidden sm:inline'>Print / PDF</span>
 							</button>
 							<a
 								href={`mailto:${personalInfo.email}?subject=Job Opportunity for Narak Leng`}
-								className='inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[rgb(167,241,117)] hover:bg-[#96e062] text-zinc-950 transition-colors'>
-								<Mail className='w-3.5 h-3.5 text-[rgb(255,87,87)]' />
+								className='inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#0071e3] hover:bg-[#0077ed] text-white transition-colors shadow-xs'>
+								<Mail className='w-3.5 h-3.5 text-[#bf4800] dark:text-[#f56300]' />
 								<span className='hidden sm:inline'>Contact</span>
 							</a>
 							<button
 								onClick={onClose}
-								className='flex h-8 w-8 items-center justify-center rounded-full text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors ml-1'
+								className='flex h-8 w-8 items-center justify-center rounded-full text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors ml-1'
 								aria-label='Close'>
 								<X className='w-4 h-4' />
 							</button>
@@ -104,20 +108,20 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
 									<h1 className='text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white'>
 										{personalInfo.name}
 									</h1>
-									<p className='text-[rgb(58,117,22)] dark:text-[rgb(167,241,117)] font-semibold text-lg mt-1'>
+									<p className='text-[#0066cc] dark:text-[#2997ff] font-semibold text-lg mt-1'>
 										{personalInfo.role}
 									</p>
 								</div>
 								<div className='text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 space-y-1 sm:text-right'>
 									<p className='flex items-center sm:justify-end gap-1.5'>
-										<MapPin className='w-3.5 h-3.5 text-[rgb(255,87,87)]' />
+										<MapPin className='w-3.5 h-3.5 text-[#bf4800] dark:text-[#f56300]' />
 										{personalInfo.location}
 									</p>
 									<p className='flex items-center sm:justify-end gap-1.5'>
-										<Mail className='w-3.5 h-3.5 text-[rgb(255,87,87)]' />
+										<Mail className='w-3.5 h-3.5 text-[#bf4800] dark:text-[#f56300]' />
 										{personalInfo.email}
 									</p>
-									<p className='text-[rgb(58,117,22)] dark:text-[rgb(167,241,117)] font-mono'>
+									<p className='text-[#0066cc] dark:text-[#2997ff] font-mono'>
 										{personalInfo.portfolio}
 									</p>
 								</div>
@@ -132,8 +136,8 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
 
 						{/* Professional Experience */}
 						<div className='space-y-4'>
-							<h2 className='text-sm font-bold uppercase tracking-wider text-[rgb(58,117,22)] dark:text-[rgb(167,241,117)] flex items-center gap-2'>
-								<Briefcase className='w-4 h-4 text-[rgb(255,87,87)]' />
+							<h2 className='text-sm font-bold uppercase tracking-wider text-[#0066cc] dark:text-[#2997ff] flex items-center gap-2'>
+								<Briefcase className='w-4 h-4 text-[#bf4800] dark:text-[#f56300]' />
 								Professional Experience
 							</h2>
 							<div className='space-y-5'>
@@ -146,7 +150,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
 												<h3 className='font-bold text-zinc-900 dark:text-zinc-100 text-base'>
 													{exp.role}
 												</h3>
-												<p className='text-sm text-[rgb(58,117,22)] dark:text-[rgb(167,241,117)] font-medium'>
+												<p className='text-sm text-[#0066cc] dark:text-[#2997ff] font-medium'>
 													{exp.company}
 												</p>
 											</div>
@@ -157,7 +161,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
 										<ul className='mt-3 space-y-1.5 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300'>
 											{exp.responsibilities.map((r, rIdx) => (
 												<li key={rIdx} className='flex items-start gap-2'>
-													<span className='h-1.5 w-1.5 rounded-full bg-[rgb(255,87,87)] mt-2 shrink-0' />
+													<span className='h-1.5 w-1.5 rounded-full bg-[#f56300] mt-2 shrink-0' />
 													<span>{r}</span>
 												</li>
 											))}
@@ -169,8 +173,8 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
 
 						{/* Education & Journey */}
 						<div className='space-y-4'>
-							<h2 className='text-sm font-bold uppercase tracking-wider text-[rgb(58,117,22)] dark:text-[rgb(167,241,117)] flex items-center gap-2'>
-								<GraduationCap className='w-4 h-4 text-[rgb(255,87,87)]' />
+							<h2 className='text-sm font-bold uppercase tracking-wider text-[#0066cc] dark:text-[#2997ff] flex items-center gap-2'>
+								<GraduationCap className='w-4 h-4 text-[#bf4800] dark:text-[#f56300]' />
 								Education & Certifications
 							</h2>
 							<div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
@@ -197,7 +201,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
 
 						{/* Technical Skills Overview */}
 						<div className='space-y-4'>
-							<h2 className='text-sm font-bold uppercase tracking-wider text-[rgb(58,117,22)] dark:text-[rgb(167,241,117)]'>
+							<h2 className='text-sm font-bold uppercase tracking-wider text-[#0066cc] dark:text-[#2997ff]'>
 								Core Skills & Technical Competencies
 							</h2>
 							<div className='grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm'>

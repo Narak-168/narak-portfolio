@@ -17,6 +17,13 @@ export interface Project {
 	stats?: { label: string; value: string }[];
 }
 
+export interface ArtworkItem {
+	id: string;
+	title: string;
+	client: string;
+	image: string;
+}
+
 export interface SkillItem {
 	name: string;
 	iconName: string;
@@ -110,6 +117,46 @@ export const quickStats = [
 	{ value: "HR & Tech", label: "Multi-domain Experience" },
 ];
 
+// Poster designs; images are 4:5 WebP renders of the original SVG artwork
+export const artworksData: ArtworkItem[] = [
+	{
+		id: "anniversary",
+		title: "1st Anniversary Celebration",
+		client: "First Class Academy",
+		image: "/images/poster/anniversary.webp",
+	},
+	{
+		id: "luckyDraw",
+		title: "Anniversary Lucky Draw",
+		client: "First Class Academy",
+		image: "/images/poster/lucky-draw.webp",
+	},
+	{
+		id: "summerCamp",
+		title: "Day Care Summer Camp",
+		client: "First Class Academy",
+		image: "/images/poster/summer-camp.webp",
+	},
+	{
+		id: "waterFestival",
+		title: "Water Festival",
+		client: "First Class Academy",
+		image: "/images/poster/water-festival.webp",
+	},
+	{
+		id: "coronationDay",
+		title: "King's Coronation Day",
+		client: "First Class Academy",
+		image: "/images/poster/coronation-day.webp",
+	},
+	{
+		id: "queenMotherBirthday",
+		title: "Queen Mother's Birthday",
+		client: "First Class Academy",
+		image: "/images/poster/queen-mother-birthday.webp",
+	},
+];
+
 export const projectsData: Project[] = [
 	// Coding Projects
 	{
@@ -132,7 +179,7 @@ export const projectsData: Project[] = [
 		],
 		githubUrl: "https://github.com/Narak-168/exSTAD",
 		liveUrl: "https://exstad.narak.dev",
-		previewImage: "/images/projectCover/EXSTAD.svg",
+		previewImage: "/images/projectCover/EXSTAD.webp",
 		features: [
 			"Enterprise Single Sign-On (SSO) integration using Keycloak",
 			"Interactive step-by-step curriculum and scholarship learning roadmaps",
@@ -167,7 +214,7 @@ export const projectsData: Project[] = [
 		],
 		githubUrl: "https://github.com/Narak-168/Taskify",
 		liveUrl: "https://taskify.narak.dev",
-		previewImage: "/images/projectCover/TASKIFY.svg",
+		previewImage: "/images/projectCover/TASKIFY.webp",
 		features: [
 			"Interactive Kanban boards with smooth drag-and-drop mechanics",
 			"Real-time task filtering by tag, priority, and assigned team members",
@@ -202,7 +249,7 @@ export const projectsData: Project[] = [
 		],
 		githubUrl: "https://github.com/Narak-168/TechDeal",
 		liveUrl: "https://techdeal.narak.dev",
-		previewImage: "/images/projectCover/TechDeal.svg",
+		previewImage: "/images/projectCover/TechDeal.webp",
 		features: [
 			"Interactive catalog with multi-facet filters (category, brand, price)",
 			"Dynamic shopping cart with persistent storage and instant subtotal calculation",
@@ -239,7 +286,7 @@ export const projectsData: Project[] = [
 		],
 		githubUrl: "https://github.com/Narak-168",
 		liveUrl: "https://github.com/Narak-168",
-		previewImage: "/images/projectCover/SPRING.svg",
+		previewImage: "/images/projectCover/SPRING.webp",
 		features: [
 			"JWT token-based authentication and secure role-based endpoint authorization",
 			"Transactional banking endpoints for balance inquiry, deposits, and transfers",
@@ -275,15 +322,14 @@ export const projectsData: Project[] = [
 		],
 		githubUrl: "https://github.com/Narak-168",
 		liveUrl: "https://github.com/Narak-168",
-		previewImage: "/images/projectCover/JAVA.svg",
+		previewImage: "/images/projectCover/JAVA.webp",
 		features: [
 			"Interactive console-based menu with formatted ASCII table output",
 			"Full CRUD capabilities: create, read, update, delete, and restore products",
 			"In-memory pagination and fast search by ID, name, or product category",
 			"Robust input validation, exception handling, and persistent data storage",
 		],
-		architecture:
-			"Core Java CLI Application with Modular OOP Design",
+		architecture: "Core Java CLI Application with Modular OOP Design",
 		stats: [
 			{ label: "Status", value: "Console" },
 			{ label: "Language", value: "Core Java" },
@@ -301,24 +347,17 @@ export const projectsData: Project[] = [
 			"A responsive personal portfolio showcasing my development, UI/UX, and design work.",
 		longDescription:
 			"A developer portfolio crafted with an emphasis on minimalist aesthetics, subtle animations, typography hierarchy, and top-tier Lighthouse performance. Built with Next.js App Router, TypeScript, Tailwind CSS, and Motion, it features dynamic theme switching, bilingual Khmer/English support, interactive modal drawers, and responsive layouts across all viewports.",
-		technologies: [
-			"Next.js",
-			"TypeScript",
-			"Tailwind CSS",
-			"Motion",
-			"i18n",
-		],
+		technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Motion", "i18n"],
 		githubUrl: "https://github.com/Narak-168/narak-portfolio",
 		liveUrl: "https://narak.dev",
-		previewImage: "/images/projectCover/narak img.svg",
+		previewImage: "/images/projectCover/narak img.webp",
 		features: [
 			"Lightning-fast Next.js App Router with server-side metadata optimization",
 			"Bilingual Khmer (Krasar font) and English localization engine",
 			"Custom micro-interactions, scroll reveals, and smooth page transitions",
 			"Minimalist dark & light aesthetic with theme persistence",
 		],
-		architecture:
-			"Next.js App Router + TypeScript + Tailwind CSS v4 + Motion",
+		architecture: "Next.js App Router + TypeScript + Tailwind CSS v4 + Motion",
 		stats: [
 			{ label: "Status", value: "Production" },
 			{ label: "Framework", value: "Next.js 16" },
@@ -347,15 +386,14 @@ export const projectsData: Project[] = [
 		],
 		githubUrl: "https://github.com/Narak-168/exSTAD",
 		liveUrl: "https://www.figma.com",
-		previewImage: "/images/ux-uiCover/exSTAD-ux_ui.svg",
+		previewImage: "/images/ux-uiCover/exSTAD-ux_ui.webp",
 		features: [
 			"Comprehensive Figma design system with tokens for typography, spacing, and colors",
 			"Multi-step scholarship application flow tested for minimal user drop-off",
 			"Interactive scholar roadmap interface with visual progress milestones",
 			"High-fidelity interactive prototypes for both desktop and mobile viewports",
 		],
-		architecture:
-			"Figma Design System with Modular Auto-Layout Tokens",
+		architecture: "Figma Design System with Modular Auto-Layout Tokens",
 		stats: [
 			{ label: "Tool", value: "Figma" },
 			{ label: "Domain", value: "Scholarship / EdTech" },
@@ -382,15 +420,14 @@ export const projectsData: Project[] = [
 		],
 		githubUrl: "https://github.com/Narak-168/Taskify",
 		liveUrl: "https://www.figma.com",
-		previewImage: "/images/ux-uiCover/TASKIFY-ux_ui.svg",
+		previewImage: "/images/ux-uiCover/TASKIFY-ux_ui.webp",
 		features: [
 			"Ergonomic Kanban board layout tailored for agile sprint planning",
 			"Complete light and dark mode variants crafted with WCAG accessibility standards",
 			"Micro-interaction specs for drag handles, modal overlays, and quick task cards",
 			"Component variant library in Figma with auto-layout and interactive states",
 		],
-		architecture:
-			"Figma Component System with Interactive Variants",
+		architecture: "Figma Component System with Interactive Variants",
 		stats: [
 			{ label: "Tool", value: "Figma" },
 			{ label: "Focus", value: "Agile Ergonomics" },
@@ -424,8 +461,7 @@ export const projectsData: Project[] = [
 			"Mobile-first responsive wireframes and high-fidelity interactive screens",
 			"Design system components with responsive grids and e-commerce UI tokens",
 		],
-		architecture:
-			"E-Commerce Design System with Conversion-Optimized Flows",
+		architecture: "E-Commerce Design System with Conversion-Optimized Flows",
 		stats: [
 			{ label: "Tool", value: "Figma" },
 			{ label: "Domain", value: "Tech Retail" },
@@ -459,8 +495,7 @@ export const projectsData: Project[] = [
 			"Trust badges and verified room photos to prevent rental scams",
 			"Bilingual Khmer-English interface with friendly typography and visual hierarchy",
 		],
-		architecture:
-			"Mobile App UI/UX Architecture with Localized Map Flows",
+		architecture: "Mobile App UI/UX Architecture with Localized Map Flows",
 		stats: [
 			{ label: "Tool", value: "Figma" },
 			{ label: "Type", value: "Mini Project" },
@@ -494,8 +529,7 @@ export const projectsData: Project[] = [
 			"Streamlined fund transfer sequence with recipient avatars and instant confirmation",
 			"Refined Khmer font hierarchy and balanced contrast for both bright sunlight and dark environments",
 		],
-		architecture:
-			"Mobile FinTech Architecture with Thumb-Zone Ergonomics",
+		architecture: "Mobile FinTech Architecture with Thumb-Zone Ergonomics",
 		stats: [
 			{ label: "Tool", value: "Figma" },
 			{ label: "Category", value: "FinTech Clone / Redesign" },
@@ -726,11 +760,33 @@ export const skillsData = {
 
 export const experiencesData: ExperienceItem[] = [
 	{
+		role: "IT Support & Web Development Intern",
+		company: "DemoQ (Cambodia) Co., Ltd.",
+		companyDetail:
+			"Operations / Internal Service – technology and operations team",
+		period: "Oct 2026 – Present",
+		isCurrent: true,
+		location: "Phnom Penh, Cambodia",
+		responsibilities: [
+			"Managing user accounts, permissions and licences across Microsoft 365 and internal business systems.",
+			"Providing first-line IT support for laptops, printers, network, email, Teams and SharePoint/OneDrive, escalating to vendors when needed.",
+			"Preparing and handing over new devices, patching operating systems and software, and keeping the hardware and licence asset register up to date.",
+			"Building and updating pages and components for demoq.com.kh with HTML, CSS and JavaScript, turning Creative team designs into responsive layouts.",
+			"Monitoring website uptime, speed, SEO and analytics, and handling CMS updates, backups, and domain, SSL and hosting renewals.",
+			"Administering FlowyTeam (users, roles, OKRs/KPIs, workflows and dashboards) and training staff with Khmer and English quick-reference guides.",
+		],
+		keySkills: [
+			"IT Support",
+			"Microsoft 365",
+			"Web Development",
+			"FlowyTeam Administration",
+		],
+	},
+	{
 		role: "Young Retailer – HR",
 		company: "Chip Mong Retail | Chip Mong Supermarket",
 		companyDetail: "Leading retail conglomerate in Cambodia",
-		period: "2026 – Present",
-		isCurrent: true,
+		period: "Previous Experience",
 		location: "Phnom Penh, Cambodia",
 		responsibilities: [
 			"Managing and validating employee data across supermarket branches with high accuracy.",

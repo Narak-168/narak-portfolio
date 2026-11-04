@@ -21,7 +21,7 @@ export default function PortfolioPage() {
 
 	return (
 		<div
-			className={`min-h-screen flex flex-col bg-neutral-50 dark:bg-[#09090b] text-neutral-900 dark:text-neutral-100 transition-colors duration-200 ${
+			className={`min-h-screen flex flex-col bg-white dark:bg-black text-[#1d1d1f] dark:text-[#f5f5f7] transition-colors duration-200 selection:bg-[#0071e3]/30 selection:text-black dark:selection:text-white ${
 				locale === "km" ? "font-khmer" : ""
 			}`}>
 			{/* Sticky Navigation Bar */}

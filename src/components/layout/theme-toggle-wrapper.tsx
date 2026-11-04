@@ -71,7 +71,7 @@ export const ThemeToggleWrapper = ({
 		return (
 			<button
 				className={cn(
-					"relative flex h-9 w-9 items-center justify-center rounded-full bg-white text-neutral-950 transition-colors hover:bg-neutral-50 dark:bg-neutral-950 dark:text-neutral-50 dark:hover:bg-neutral-900",
+					"relative flex h-8 w-8 items-center justify-center rounded-full",
 					className,
 				)}
 				disabled
@@ -86,7 +86,7 @@ export const ThemeToggleWrapper = ({
 			ref={buttonRef}
 			onClick={toggleTheme}
 			className={cn(
-				"relative flex h-9 w-9 items-center justify-center rounded-full bg-white text-neutral-950 transition-colors hover:bg-neutral-50 dark:bg-neutral-950 dark:text-neutral-50 dark:hover:bg-neutral-900 border border-zinc-200 dark:border-zinc-800 hover:border-brand-green/60 dark:hover:border-brand-green/60",
+				"relative flex h-8 w-8 items-center justify-center rounded-full text-[#1d1d1f] dark:text-[#f5f5f7] hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer",
 				className,
 			)}
 			aria-label='Toggle theme'
@@ -95,7 +95,7 @@ export const ThemeToggleWrapper = ({
 				size={16}
 				strokeWidth={2}
 				className={cn(
-					"absolute transition-all text-[rgb(255,87,87)]",
+					"absolute transition-all text-[#bf4800] dark:text-[#f56300]",
 					isDark ?
 						"rotate-90 scale-0 opacity-0"
 					:	"rotate-0 scale-100 opacity-100",
@@ -106,7 +106,7 @@ export const ThemeToggleWrapper = ({
 				size={16}
 				strokeWidth={2}
 				className={cn(
-					"absolute transition-all text-[rgb(167,241,117)]",
+					"absolute transition-all text-[#2997ff]",
 					isDark ?
 						"rotate-0 scale-100 opacity-100"
 					:	"rotate-90 scale-0 opacity-0",

@@ -6,10 +6,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-	--color-brand-green: #a7f175;
-	--color-brand-green-dark: #3a7516;
-	--color-brand-red: #ff5757;
-	--color-brand-red-dark: #d63030;
+	--color-brand-green: #0071e3; /* Apple blue (primary) */
+	--color-brand-green-dark: #0066cc; /* Apple link blue */
+	--color-brand-red: #bf4800; /* Apple orange (secondary) */
+	--color-brand-red-dark: #f56300;
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-geist-sans);
@@ -248,7 +248,7 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground transition-colors duration-200 antialiased selection:bg-[rgb(167,241,117)] selection:text-zinc-950;
+		@apply bg-background text-foreground transition-colors duration-200 antialiased selection:bg-[#0071e3]/25;
 	}
 	html {
 		scroll-behavior: smooth;
@@ -374,7 +374,7 @@ html:not([lang="km"]) *:not(.font-khmer) {
 .radial-glow {
 	background: radial-gradient(
 		600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-		rgba(167, 241, 117, 0.08),
+		rgba(0, 113, 227, 0.08),
 		transparent 40%
 	);
 }
@@ -382,7 +382,7 @@ html:not([lang="km"]) *:not(.font-khmer) {
 .radial-glow-red {
 	background: radial-gradient(
 		600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-		rgba(255, 87, 87, 0.08),
+		rgba(245, 99, 0, 0.08),
 		transparent 40%
 	);
 }
@@ -401,3 +401,88 @@ html:not([lang="km"]) *:not(.font-khmer) {
 ::-webkit-scrollbar-thumb:hover {
 	background: rgba(160, 160, 160, 0.4);
 }
+
+/* Apple-Inspired Cupertino Glass & Bento Utilities */
+.apple-glass {
+	background: rgba(255, 255, 255, 0.72);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark .apple-glass {
+	background: rgba(22, 22, 23, 0.75);
+	backdrop-filter: blur(24px);
+	-webkit-backdrop-filter: blur(24px);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.apple-card {
+	background: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.07);
+	box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.dark .apple-card {
+	background: #161617;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
+}
+
+.apple-bento {
+	border-radius: 28px;
+	transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-bento:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.12);
+}
+
+.dark .apple-bento:hover {
+	border-color: rgba(255, 255, 255, 0.16);
+	box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+.apple-headline {
+	letter-spacing: -0.03em;
+}
+
+/* Apple.com-style building blocks. Sections alternate white / light gray;
+   tiles take the opposite tone so they read without borders. */
+@utility section-white {
+	@apply bg-white dark:bg-black;
+}
+
+@utility section-gray {
+	@apply bg-[#f5f5f7] dark:bg-[#0a0a0a];
+}
+
+@utility tile {
+	@apply rounded-[28px] bg-white dark:bg-[#1d1d1f];
+}
+
+@utility tile-gray {
+	@apply rounded-[28px] bg-[#f5f5f7] dark:bg-[#1d1d1f];
+}
+
+@utility btn-pill {
+	@apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-[15px] font-medium bg-[#0071e3] text-white transition-colors hover:bg-[#0077ed] cursor-pointer;
+}
+
+@utility no-scrollbar {
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+@utility link-more {
+	@apply inline-flex items-center gap-0.5 text-[15px] text-[#0066cc] dark:text-[#2997ff] hover:underline underline-offset-4 cursor-pointer;
+}
+
+.apple-subheadline {
+	letter-spacing: -0.015em;
+	color: #86868b;
+}
+

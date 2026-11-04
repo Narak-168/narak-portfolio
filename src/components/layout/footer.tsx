@@ -3,38 +3,59 @@
 "use client";
 
 import { personalInfo } from "@/data/portfolio-data";
+import { useTranslation } from "@/hooks/useTranslation";
 import { ArrowUp, Mail } from "lucide-react";
 import { SiGithub, SiTelegram } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 
+const SITE_VERSION = "3.0";
+
+const footerLinks = [
+	{ key: "nav.about", href: "#about" },
+	{ key: "nav.projects", href: "#projects" },
+	{ key: "nav.skills", href: "#skills" },
+	{ key: "nav.experience", href: "#experience" },
+	{ key: "nav.education", href: "#journey" },
+	{ key: "nav.contact", href: "#contact" },
+];
+
+const socialClass =
+	"text-[#6e6e73] hover:text-[#1d1d1f] dark:text-[#86868b] dark:hover:text-white transition-colors";
+
 export function Footer() {
+	const { t } = useTranslation();
+
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
 	return (
-		<footer className='border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 py-12 transition-colors'>
-			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
-				<div className='flex flex-col md:flex-row items-center justify-between gap-6'>
-					{/* Brand & Subtitle */}
-					<div className='text-center md:text-left'>
-						<a
-							href='#home'
-							className='text-xl font-bold tracking-tight text-zinc-900 dark:text-white hover:text-[rgb(58,117,22)] dark:hover:text-[rgb(167,241,117)] transition-colors'>
-							Narak Leng
-						</a>
-						<p className='text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1 font-medium'>
-							Front-end Developer • UI/UX Enthusiast • Creative Developer
-						</p>
-					</div>
+		<footer className='section-gray text-xs text-[#6e6e73] dark:text-[#86868b]'>
+			<div className='max-w-5xl mx-auto px-4 sm:px-6 py-10'>
+				<p className='pb-4 border-b border-[#d2d2d7] dark:border-[#424245] leading-relaxed'>
+					{t("footer.tagline")} · {t("hero.location")}. {t("footer.builtWith")}.
+				</p>
 
-					{/* Social Links */}
-					<div className='flex items-center gap-3'>
+				<div className='py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-5'>
+					<nav
+						className='flex flex-wrap gap-x-5 gap-y-2'
+						aria-label='Footer Navigation'>
+						{footerLinks.map((link) => (
+							<a
+								key={link.key}
+								href={link.href}
+								className='text-[#424245] hover:text-[#1d1d1f] hover:underline dark:text-[#d2d2d7] dark:hover:text-white'>
+								{t(link.key)}
+							</a>
+						))}
+					</nav>
+
+					<div className='flex items-center gap-4'>
 						<a
 							href={personalInfo.githubUrl}
 							target='_blank'
 							rel='noopener noreferrer'
-							className='flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all hover:scale-105'
+							className={socialClass}
 							aria-label='GitHub'>
 							<SiGithub className='w-4 h-4' />
 						</a>
@@ -42,7 +63,7 @@ export function Footer() {
 							href={personalInfo.linkedinUrl}
 							target='_blank'
 							rel='noopener noreferrer'
-							className='flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all hover:scale-105'
+							className={socialClass}
 							aria-label='LinkedIn'>
 							<FaLinkedin className='w-4 h-4' />
 						</a>
@@ -50,36 +71,32 @@ export function Footer() {
 							href={personalInfo.telegramUrl}
 							target='_blank'
 							rel='noopener noreferrer'
-							className='flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all hover:scale-105'
+							className={socialClass}
 							aria-label='Telegram'>
 							<SiTelegram className='w-4 h-4' />
 						</a>
 						<a
 							href={`mailto:${personalInfo.email}`}
-							className='flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all hover:scale-105'
+							className={socialClass}
 							aria-label='Email'>
 							<Mail className='w-4 h-4' />
 						</a>
 					</div>
-
-					{/* Back to Top */}
-					<div className='flex items-center gap-4'>
-						<button
-							onClick={scrollToTop}
-							className='inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-brand-green hover:bg-brand-green/15 dark:hover:bg-brand-green/10 transition-colors cursor-pointer'
-							aria-label='Back to top'>
-							<span>Back to top</span>
-							<ArrowUp className='w-3.5 h-3.5 text-[rgb(255,87,87)]' />
-						</button>
-					</div>
 				</div>
 
-				{/* Copyright Notice */}
-				<div className='mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 dark:text-zinc-400 gap-2'>
-					<p>© 2026 Narak Leng. All rights reserved.</p>
-					<p className='font-mono text-[11px] text-zinc-400 dark:text-zinc-500'>
-						Built with Next.js, TypeScript & Tailwind CSS
+				<div className='pt-4 border-t border-[#d2d2d7] dark:border-[#424245] flex flex-col sm:flex-row sm:items-center justify-between gap-3'>
+					<p>
+						{t("footer.copyright")}
+						<span className='mx-2 text-[#d2d2d7] dark:text-[#424245]'>|</span>
+						{t("footer.version")} {SITE_VERSION}
 					</p>
+					<button
+						onClick={scrollToTop}
+						className='inline-flex items-center gap-1 text-[#424245] hover:text-[#1d1d1f] hover:underline dark:text-[#d2d2d7] dark:hover:text-white cursor-pointer self-start sm:self-auto'
+						aria-label='Back to top'>
+						{t("footer.backToTop")}
+						<ArrowUp className='w-3 h-3' />
+					</button>
 				</div>
 			</div>
 		</footer>

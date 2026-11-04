@@ -2,8 +2,8 @@
 
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { useAnimate } from "motion/react";
 import {
 	SiHtml5,
 	SiCss,
@@ -31,17 +31,64 @@ import {
 	Smartphone,
 	CheckCheck,
 	Component,
-	Wrench,
 	Sparkles,
 } from "lucide-react";
 import { skillsData } from "@/data/portfolio-data";
 import { useTranslation } from "@/hooks/useTranslation";
+import { SectionHeader } from "@/components/ui/section-header";
+import { TabNav } from "@/components/ui/tab-nav";
 
-type SkillCategory = "all" | "frontend" | "backend" | "tools" | "uiux";
+type SkillCategory = "frontend" | "backend" | "tools" | "uiux";
 
 export function SkillsSection() {
 	const { t } = useTranslation();
-	const [activeCategory, setActiveCategory] = useState<SkillCategory>("all");
+	const [activeCategory, setActiveCategory] =
+		useState<SkillCategory>("frontend");
+	const [shownCategory, setShownCategory] = useState<SkillCategory>("frontend");
+	const [panelRef, animate] = useAnimate<HTMLDivElement>();
+	const gridRef = useRef<HTMLDivElement>(null);
+	const pendingCategory = useRef<SkillCategory>("frontend");
+	const isFirstRender = useRef(true);
+
+	// apple.com tabbed gallery: tab moves at once, the old panel fades out,
+	// then the new one fades in while the panel height eases to fit it
+	const changeCategory = async (id: string) => {
+		const next = id as SkillCategory;
+		if (next === pendingCategory.current) return;
+		pendingCategory.current = next;
+		setActiveCategory(next);
+		const panel = panelRef.current;
+		if (panel) {
+			panel.style.height = `${panel.offsetHeight}px`;
+			panel.style.overflow = "hidden";
+			await animate(panel, { opacity: 0 }, { duration: 0.2, ease: "easeOut" });
+		}
+		// A newer tab click took over while this one was fading out
+		if (pendingCategory.current !== next) return;
+		setShownCategory(next);
+	};
+
+	useEffect(() => {
+		if (isFirstRender.current) {
+			isFirstRender.current = false;
+			return;
+		}
+		const panel = panelRef.current;
+		const grid = gridRef.current;
+		if (!panel || !grid) return;
+		animate(
+			panel,
+			{ height: grid.offsetHeight, opacity: 1 },
+			{
+				height: { duration: 0.9, ease: [0.455, 0.03, 0.515, 0.955] },
+				opacity: { duration: 0.3, ease: "easeOut" },
+			},
+		).then(() => {
+			if (pendingCategory.current !== shownCategory) return;
+			panel.style.height = "";
+			panel.style.overflow = "";
+		});
+	}, [shownCategory, animate, panelRef]);
 
 	// Adobe XD custom SVG icon
 	const AdobeXDIcon = () => (
@@ -119,7 +166,6 @@ export function SkillsSection() {
 	};
 
 	const categories = [
-		{ id: "all", label: t("skills.all") },
 		{ id: "frontend", label: t("skills.frontend") },
 		{ id: "backend", label: t("skills.backend") },
 		{ id: "tools", label: t("skills.tools") },
@@ -134,90 +180,61 @@ export function SkillsSection() {
 	];
 
 	const filteredSkills = allSkills.filter((item) => {
-		if (activeCategory === "all") return true;
-		if (activeCategory === "frontend") return item.group === "Front-end";
-		if (activeCategory === "backend") return item.group === "Backend";
-		if (activeCategory === "tools") return item.group === "Tools";
-		if (activeCategory === "uiux") return item.group === "UI/UX";
+		if (shownCategory === "frontend") return item.group === "Front-end";
+		if (shownCategory === "backend") return item.group === "Backend";
+		if (shownCategory === "tools") return item.group === "Tools";
+		if (shownCategory === "uiux") return item.group === "UI/UX";
 		return true;
 	});
 
 	return (
-		<section id='skills' className='py-20 sm:py-28 relative'>
-			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
-				{/* Section Header */}
-				<div className='text-center max-w-2xl mx-auto mb-12'>
-					<span className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#a7f175]/15 text-[#3a7516] dark:text-[#a7f175] border border-[#a7f175]/30 mb-3'>
-						<Wrench className='w-3.5 h-3.5 text-[#ff5757]' />
-						{t("skills.badge")}
-					</span>
-					<h2 className='text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white'>
-						{t("skills.title")}
-					</h2>
-					<p className='text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-2'>
-						{t("skills.subtitle")}
-					</p>
-				</div>
+		<section id='skills' className='section-gray py-24 sm:py-32'>
+			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
+				<SectionHeader
+					eyebrow={t("skills.badge")}
+					title={t("skills.title")}
+					subtitle={t("skills.subtitle")}
+					className='mb-10 sm:mb-12'
+				/>
 
-				{/* Filter Category Tabs */}
-				<div className='flex flex-wrap items-center justify-center gap-2 mb-12'>
-					{categories.map((cat) => (
-						<button
-							key={cat.id}
-							onClick={() => setActiveCategory(cat.id as SkillCategory)}
-							className={`px-4 py-2 rounded-xl text-xs sm:text-sm transition-all cursor-pointer ${
-								activeCategory === cat.id ?
-									"bg-[#a7f175] text-zinc-950 font-bold shadow-xs"
-								:	"bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 font-medium"
-							}`}>
-							{cat.label}
-						</button>
-					))}
+				{/* Apple-style tab nav */}
+				<div className='flex justify-center mb-10 sm:mb-12'>
+					<TabNav
+						items={categories}
+						activeId={activeCategory}
+						onChange={changeCategory}
+						ariaLabel={t("skills.title")}
+					/>
 				</div>
 
 				{/* Skills Grid */}
-				<motion.div
-					layout
-					className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4'>
-					<AnimatePresence>
+				<div ref={panelRef} role='tabpanel'>
+					<div
+						ref={gridRef}
+						className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4'>
 						{filteredSkills.map((skill) => (
-							<motion.div
+							<div
 								key={skill.name}
-								layout
-								initial={{ opacity: 0, scale: 0.9 }}
-								animate={{ opacity: 1, scale: 1 }}
-								exit={{ opacity: 0, scale: 0.9 }}
-								transition={{ duration: 0.25 }}
-								className='p-4 sm:p-5 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-[#a7f175]/50 dark:hover:border-[#a7f175]/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:shadow-[#a7f175]/10 group flex flex-col justify-between'>
-								<div>
-									<div className='flex items-center justify-between mb-3'>
-										<div className='p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/80 border border-zinc-100 dark:border-zinc-700/60 group-hover:scale-110 transition-transform'>
-											{renderSkillIcon(skill.name)}
-										</div>
-										<span className='px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200/60 dark:border-zinc-700/60'>
-											{skill.group}
-										</span>
-									</div>
-
-									<h3 className='font-bold text-sm sm:text-base text-zinc-900 dark:text-zinc-100 group-hover:text-[#3a7516] dark:group-hover:text-[#a7f175] transition-colors'>
-										{skill.name}
-									</h3>
-
-									<p className='text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2 leading-relaxed'>
-										{skill.desc}
-									</p>
+								className='tile p-5 sm:p-6 flex flex-col transition-transform duration-300 hover:scale-[1.02]'>
+								{/* App-icon squircle */}
+								<div className='h-12 w-12 rounded-[14px] bg-[#f5f5f7] dark:bg-black flex items-center justify-center'>
+									{renderSkillIcon(skill.name)}
 								</div>
 
-								<div className='mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/60 flex items-center justify-between text-[10px] font-mono text-zinc-600 dark:text-zinc-400'>
-									<span>{t("skills.proficiency")}</span>
-									<span className='text-[#3a7516] dark:text-[#a7f175] font-semibold'>
-										{t(`skills.levels.${skill.level}`) || skill.level}
-									</span>
-								</div>
-							</motion.div>
+								<h3 className='mt-4 text-base sm:text-lg font-semibold tracking-[-0.015em] text-[#1d1d1f] dark:text-[#f5f5f7]'>
+									{skill.name}
+								</h3>
+								<p className='mt-1 text-xs sm:text-sm leading-relaxed text-[#6e6e73] dark:text-[#86868b] line-clamp-2'>
+									{skill.desc}
+								</p>
+
+								<p className='mt-auto pt-4 text-xs text-[#86868b]'>
+									{skill.group}
+								</p>
+							</div>
 						))}
-					</AnimatePresence>
-				</motion.div>
+					</div>
+				</div>
 			</div>
 		</section>
 	);

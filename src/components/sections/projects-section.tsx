@@ -2,12 +2,28 @@
 
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { Project, projectsData } from "@/data/portfolio-data";
+import React, {
+	useState,
+	useMemo,
+	useRef,
+	useCallback,
+	useEffect,
+} from "react";
+import { motion, useAnimate } from "motion/react";
+import {
+	ArtworkItem,
+	Project,
+	artworksData,
+	projectsData,
+} from "@/data/portfolio-data";
 import { ProjectCard } from "@/components/ui/project-card";
+import { ArtworkCard } from "@/components/ui/artwork-card";
 import { ProjectDetailModal } from "@/components/modals/project-detail-modal";
+import { ArtworkLightbox } from "@/components/modals/artwork-lightbox";
 import { useTranslation } from "@/hooks/useTranslation";
-import { FolderGit2, ArrowUpRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { SectionHeader } from "@/components/ui/section-header";
+import { TabNav } from "@/components/ui/tab-nav";
 
 const itemKeyMap: Record<string, string> = {
 	exstad: "exstad",
@@ -21,12 +37,17 @@ const itemKeyMap: Record<string, string> = {
 	"techdeal-uxui": "techdealUxui",
 	"dambaul-uxui": "dambaulUxui",
 	"acleda-uxui": "acledaUxui",
+	"public-school-mis": "publicSchoolMis",
 };
 
 export function ProjectsSection() {
 	const { t } = useTranslation();
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+	const [selectedArtwork, setSelectedArtwork] = useState<ArtworkItem | null>(
+		null,
+	);
 	const [activeFilter, setActiveFilter] = useState("all");
+	const [shownFilter, setShownFilter] = useState("all");
 
 	const localizedProjects = useMemo(() => {
 		return projectsData.map((project) => {
@@ -67,29 +88,98 @@ export function ProjectsSection() {
 	}, [t]);
 
 	const categories = [
-		{
-			id: "all",
-			label: t("projects.filterAll"),
-			count: localizedProjects.length,
-		},
-		{
-			id: "coding",
-			label: t("projects.filterCoding"),
-			count: localizedProjects.filter((p) => p.projectType === "coding").length,
-		},
-		{
-			id: "uxui",
-			label: t("projects.filterUxui"),
-			count: localizedProjects.filter((p) => p.projectType === "uxui").length,
-		},
+		{ id: "all", label: t("projects.filterAll") },
+		{ id: "coding", label: t("projects.filterCoding") },
+		{ id: "uxui", label: t("projects.filterUxui") },
+		{ id: "artwork", label: t("projects.filterArtwork") },
 	];
 
 	const filteredProjects = localizedProjects.filter((p) => {
-		if (activeFilter === "all") return true;
-		if (activeFilter === "coding") return p.projectType === "coding";
-		if (activeFilter === "uxui") return p.projectType === "uxui";
-		return true;
+		if (shownFilter === "all") return true;
+		if (shownFilter === "coding") return p.projectType === "coding";
+		if (shownFilter === "uxui") return p.projectType === "uxui";
+		return false;
 	});
+
+	const localizedArtworks = useMemo(
+		() =>
+			artworksData.map((artwork) => {
+				const key = `projects.artworks.${artwork.id}`;
+				const title = t(key);
+				return { ...artwork, title: title !== key ? title : artwork.title };
+			}),
+		[t],
+	);
+
+	const shownArtworks =
+		shownFilter === "all" || shownFilter === "artwork" ? localizedArtworks : [];
+
+	const [scrollerRef, animate] = useAnimate<HTMLDivElement>();
+	const [canScrollPrev, setCanScrollPrev] = useState(false);
+	const [canScrollNext, setCanScrollNext] = useState(true);
+
+	const frameRef = useRef<number | null>(null);
+
+	const updateScrollState = useCallback(() => {
+		const el = scrollerRef.current;
+		if (!el) return;
+		setCanScrollPrev(el.scrollLeft > 4);
+		setCanScrollNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+	}, [scrollerRef]);
+
+	// Scroll fires many times per frame; measure at most once per frame
+	const handleScroll = useCallback(() => {
+		if (frameRef.current !== null) return;
+		frameRef.current = requestAnimationFrame(() => {
+			frameRef.current = null;
+			updateScrollState();
+		});
+	}, [updateScrollState]);
+
+	const scrollByCard = (direction: 1 | -1) => {
+		const el = scrollerRef.current;
+		const card = el?.firstElementChild as HTMLElement | null;
+		if (!el || !card) return;
+		const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+		el.scrollBy({
+			left: direction * (card.offsetWidth + gap),
+			behavior: "smooth",
+		});
+	};
+
+	// apple.com tabbed gallery: the tab moves at once, the old panel fades out,
+	// then the new one fades in from its first card
+	const pendingFilter = useRef(activeFilter);
+
+	const changeFilter = async (id: string) => {
+		if (id === pendingFilter.current) return;
+		pendingFilter.current = id;
+		setActiveFilter(id);
+		const el = scrollerRef.current;
+		if (el)
+			await animate(el, { opacity: 0 }, { duration: 0.2, ease: "easeOut" });
+		// A newer tab click took over while this one was fading out
+		if (pendingFilter.current !== id) return;
+		setShownFilter(id);
+	};
+
+	useEffect(() => {
+		const el = scrollerRef.current;
+		if (!el) return;
+		el.scrollTo({ left: 0 });
+		updateScrollState();
+		animate(el, { opacity: 1 }, { duration: 0.3, ease: "easeOut" });
+	}, [shownFilter, updateScrollState, animate, scrollerRef]);
+
+	useEffect(() => {
+		window.addEventListener("resize", handleScroll);
+		return () => {
+			window.removeEventListener("resize", handleScroll);
+			if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+		};
+	}, [handleScroll]);
+
+	const closeArtwork = useCallback(() => setSelectedArtwork(null), []);
 
 	// If selected project is open, keep its localized version updated
 	const currentSelectedProject = useMemo(() => {
@@ -101,72 +191,88 @@ export function ProjectsSection() {
 	}, [selectedProject, localizedProjects]);
 
 	return (
-		<section id='projects' className='py-20 sm:py-28 relative'>
-			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
-				{/* Section Header */}
-				<div className='flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12'>
-					<div>
-						<span className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#a7f175]/15 text-[#3a7516] dark:text-[#a7f175] border border-[#a7f175]/30 mb-3'>
-							<FolderGit2 className='w-3.5 h-3.5 text-[#ff5757]' />
-							{t("projects.badge")}
-						</span>
-						<h2 className='text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white'>
-							{t("projects.title")}
-						</h2>
-						<p className='text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-2 max-w-lg'>
-							{t("projects.subtitle")}
-						</p>
-					</div>
+		<section id='projects' className='section-white py-24 sm:py-32'>
+			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
+				<SectionHeader
+					eyebrow={t("projects.badge")}
+					title={t("projects.title")}
+					subtitle={t("projects.subtitle")}
+					className='mb-10 sm:mb-12'
+				/>
 
-					{/* Category Filter Pills */}
-					<div className='flex flex-wrap items-center gap-2 self-start md:self-end bg-zinc-100 dark:bg-zinc-900/90 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800'>
-						{categories.map((cat) => (
-							<button
-								key={cat.id}
-								onClick={() => setActiveFilter(cat.id)}
-								className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg transition-all cursor-pointer ${
-									activeFilter === cat.id ?
-										"bg-[#a7f175] text-zinc-950 shadow-xs font-bold"
-									:	"text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white font-medium"
-								}`}>
-								<span>{cat.label}</span>
-								<span
-									className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono leading-none ${
-										activeFilter === cat.id ?
-											"bg-zinc-950/20 text-zinc-950 font-bold"
-										:	"bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
-									}`}>
-									{cat.count}
-								</span>
-							</button>
-						))}
-					</div>
+				{/* Apple-style tab nav */}
+				<div className='flex justify-center mb-10 sm:mb-12'>
+					<TabNav
+						items={categories}
+						activeId={activeFilter}
+						onChange={changeFilter}
+						ariaLabel={t("projects.title")}
+					/>
 				</div>
+			</div>
 
-				{/* Projects Grid */}
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8'>
-					{filteredProjects.map((project, idx) => (
+			{/* Projects Carousel — first card lines up with the content column, row bleeds to the screen edge */}
+			<motion.div
+				initial={{ opacity: 0, y: 32 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, margin: "-80px" }}
+				transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+				<div
+					ref={scrollerRef}
+					role='tabpanel'
+					onScroll={handleScroll}
+					className='no-scrollbar flex gap-4 sm:gap-5 overflow-x-auto overscroll-x-contain snap-x snap-proximity py-2 px-4 sm:px-6 lg:px-[max(2rem,calc((100vw-72rem)/2+2rem))] scroll-px-4 sm:scroll-px-6 lg:scroll-px-[max(2rem,calc((100vw-72rem)/2+2rem))]'>
+					{filteredProjects.map((project) => (
 						<ProjectCard
 							key={project.id}
 							project={project}
-							index={idx}
 							onSelect={(p) => setSelectedProject(p)}
 						/>
 					))}
+					{shownArtworks.map((artwork) => (
+						<ArtworkCard
+							key={artwork.id}
+							artwork={artwork}
+							onSelect={setSelectedArtwork}
+						/>
+					))}
+				</div>
+			</motion.div>
+
+			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
+				{/* Carousel paddles */}
+				<div className='mt-6 flex justify-end gap-3'>
+					<button
+						onClick={() => scrollByCard(-1)}
+						disabled={!canScrollPrev}
+						className='flex h-9 w-9 items-center justify-center rounded-full bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[#1d1d1f] dark:text-[#f5f5f7] hover:bg-[#e8e8ed] dark:hover:bg-[#2c2c2e] disabled:opacity-40 disabled:hover:bg-[#f5f5f7] dark:disabled:hover:bg-[#1d1d1f] transition-colors cursor-pointer disabled:cursor-default'
+						aria-label='Previous projects'>
+						<ChevronLeft className='w-5 h-5' />
+					</button>
+					<button
+						onClick={() => scrollByCard(1)}
+						disabled={!canScrollNext}
+						className='flex h-9 w-9 items-center justify-center rounded-full bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[#1d1d1f] dark:text-[#f5f5f7] hover:bg-[#e8e8ed] dark:hover:bg-[#2c2c2e] disabled:opacity-40 disabled:hover:bg-[#f5f5f7] dark:disabled:hover:bg-[#1d1d1f] transition-colors cursor-pointer disabled:cursor-default'
+						aria-label='Next projects'>
+						<ChevronRight className='w-5 h-5' />
+					</button>
 				</div>
 
 				{/* GitHub Explore Prompt */}
-				<div className='mt-12 text-center'>
+				<div className='mt-10 text-center'>
 					<a
 						href='https://github.com/Narak-168'
 						target='_blank'
 						rel='noopener noreferrer'
-						className='inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition-colors group'>
-						<span>{t("projects.seeGithub")}</span>
-						<ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
+						className='link-more'>
+						{t("projects.seeGithub")}
+						<ChevronRight className='w-4 h-4' />
 					</a>
 				</div>
 			</div>
+
+			{/* Full-size poster viewer */}
+			<ArtworkLightbox artwork={selectedArtwork} onClose={closeArtwork} />
 
 			{/* Project Detail Modal */}
 			<ProjectDetailModal

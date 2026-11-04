@@ -9,7 +9,6 @@ import {
 	useContext,
 	useEffect,
 	useMemo,
-	useState,
 	useSyncExternalStore,
 } from "react";
 import type { ReactNode } from "react";
@@ -33,7 +32,6 @@ type TranslationContextValue = {
 const TranslationContext = createContext<TranslationContextValue | null>(null);
 
 function getInitialLocale(): string {
-	if (typeof window === "undefined") return "en";
 	try {
 		const saved = localStorage.getItem("preferredLanguage");
 		if (saved === "en" || saved === "km") return saved;
@@ -43,10 +41,38 @@ function getInitialLocale(): string {
 	return "en";
 }
 
+// Client-side locale store. The server snapshot is always "en", so hydration
+// matches the server HTML and React switches to the saved locale right after.
+let currentLocale: string | null = null;
+const localeListeners = new Set<() => void>();
+
+function subscribeLocale(listener: () => void) {
+	localeListeners.add(listener);
+	return () => {
+		localeListeners.delete(listener);
+	};
+}
+
+function getLocaleSnapshot() {
+	if (currentLocale === null) currentLocale = getInitialLocale();
+	return currentLocale;
+}
+
+const getServerLocaleSnapshot = () => "en";
+
+function setLocale(newLocale: string) {
+	currentLocale = newLocale;
+	localeListeners.forEach((listener) => listener());
+}
+
 const emptySubscribe = () => () => {};
 
 export function TranslationProvider({ children }: { children: ReactNode }) {
-	const [locale, setLocale] = useState<string>(getInitialLocale);
+	const locale = useSyncExternalStore(
+		subscribeLocale,
+		getLocaleSnapshot,
+		getServerLocaleSnapshot,
+	);
 	const mounted = useSyncExternalStore(
 		emptySubscribe,
 		() => true,
