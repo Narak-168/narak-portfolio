@@ -343,6 +343,28 @@
 					"Network systems, relational databases, and system analysis",
 					"Graduated with practical capstone development projects"
 				]
+			},
+			"ruppEnglish": {
+				"period": "Language Studies",
+				"title": "Upper-Intermediate Levels in English",
+				"institution": "Royal University of Phnom Penh (RUPP)",
+				"badge": "English Language",
+				"description": "English language studies at the Royal University of Phnom Penh, completed through the Upper-Intermediate level.",
+				"highlights": [
+					"Reading, writing, listening and speaking skills",
+					"Academic and professional English communication"
+				]
+			},
+			"ucEnglish": {
+				"period": "Language Studies",
+				"title": "Intensive English Program",
+				"institution": "University of Cambodia (UC)",
+				"badge": "English Language",
+				"description": "An intensive English language program at the University of Cambodia, building fluency for study and work.",
+				"highlights": [
+					"Intensive practice across all four language skills",
+					"Confident everyday and workplace English"
+				]
 			}
 		}
 	},

@@ -2,12 +2,62 @@
 
 "use client";
 
-import { useMemo } from "react";
-import { motion } from "motion/react";
+import { useMemo, useRef } from "react";
+import Image from "next/image";
+import { motion, useScroll } from "motion/react";
 import { experiencesData } from "@/data/portfolio-data";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Check, MapPin } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { ShapeBurst } from "@/components/ui/shape-burst";
+
+// Shapes start popping once the photo is a third of the way up the screen and
+// are all out by the time it reaches the middle
+const PHOTO_BURST_TIMING = { start: 0.3, step: 0.035, span: 0.35 };
+
+interface ExperiencePhotoProps {
+	src: string;
+	alt: string;
+	palette?: string[];
+	className?: string;
+}
+
+function ExperiencePhoto({
+	src,
+	alt,
+	palette,
+	className = "",
+}: ExperiencePhotoProps) {
+	const ref = useRef<HTMLDivElement>(null);
+	// 0 when the photo's top enters the bottom of the screen, 1 when it is centred
+	const { scrollYProgress } = useScroll({
+		target: ref,
+		offset: ["start end", "center center"],
+	});
+
+	return (
+		<div
+			ref={ref}
+			className={`relative h-[300px] sm:h-[340px] w-full max-w-[320px] overflow-hidden ${className}`}>
+			{/* Shapes sit behind the cut-out and burst outward on scroll; the
+			    clipped zone and reduced spread keep them off the card text */}
+			<ShapeBurst
+				progress={scrollYProgress}
+				palette={palette}
+				originY='52%'
+				spread={0.78}
+				timing={PHOTO_BURST_TIMING}
+			/>
+			<Image
+				src={src}
+				alt={alt}
+				fill
+				sizes='320px'
+				className='object-contain object-bottom'
+			/>
+		</div>
+	);
+}
 
 export function ExperienceSection() {
 	const { t } = useTranslation();
@@ -72,7 +122,7 @@ export function ExperienceSection() {
 								delay: idx * 0.08,
 								ease: [0.16, 1, 0.3, 1],
 							}}
-							className='tile-gray p-8 sm:p-12 grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-8 md:gap-12'>
+							className='tile-gray p-8 sm:p-12 grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:grid-rows-[auto_1fr] gap-8 md:gap-12'>
 							{/* Role summary */}
 							<div>
 								<p className='text-sm text-[#86868b]'>{exp.period}</p>
@@ -97,7 +147,7 @@ export function ExperienceSection() {
 							</div>
 
 							{/* Responsibilities & skills */}
-							<div>
+							<div className='md:col-start-2 md:row-start-1 md:row-span-2'>
 								<p className='text-xs font-semibold uppercase tracking-wider text-[#86868b]'>
 									{t("experience.responsibilities")}
 								</p>
@@ -122,6 +172,17 @@ export function ExperienceSection() {
 									))}
 								</div>
 							</div>
+
+							{/* Photo: bottom of the left column on desktop, end of the card on
+							    phones, pulled through the card padding to sit on its bottom edge */}
+							{exp.photo && (
+								<ExperiencePhoto
+									src={exp.photo}
+									alt={`Narak Leng at ${exp.company}`}
+									palette={exp.photoPalette}
+									className='self-end mx-auto md:mx-0 md:col-start-1 md:row-start-2 -mb-8 sm:-mb-12'
+								/>
+							)}
 						</motion.div>
 					))}
 				</div>

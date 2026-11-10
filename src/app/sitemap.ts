@@ -1,40 +1,30 @@
 /** @format */
 
 import { MetadataRoute } from "next";
+import { LOCALE_PATHS, SITE_URL } from "@/lib/site";
 
+// One page per language; section anchors (#about, #projects…) are not separate
+// pages and search engines ignore them in sitemaps, so they are not listed
 export default function sitemap(): MetadataRoute.Sitemap {
-	const baseUrl = "https://narak-portfolio.vercel.app";
+	const languages = {
+		en: SITE_URL,
+		km: `${SITE_URL}${LOCALE_PATHS.km}`,
+	};
 
 	return [
 		{
-			url: baseUrl,
+			url: languages.en,
 			lastModified: new Date(),
-			changeFrequency: "weekly",
+			changeFrequency: "monthly",
 			priority: 1,
+			alternates: { languages },
 		},
 		{
-			url: `${baseUrl}#home`,
+			url: languages.km,
 			lastModified: new Date(),
 			changeFrequency: "monthly",
 			priority: 0.9,
-		},
-		{
-			url: `${baseUrl}#about`,
-			lastModified: new Date(),
-			changeFrequency: "monthly",
-			priority: 0.8,
-		},
-		{
-			url: `${baseUrl}#project`,
-			lastModified: new Date(),
-			changeFrequency: "weekly",
-			priority: 0.9,
-		},
-		{
-			url: `${baseUrl}#contact`,
-			lastModified: new Date(),
-			changeFrequency: "monthly",
-			priority: 0.7,
+			alternates: { languages },
 		},
 	];
 }

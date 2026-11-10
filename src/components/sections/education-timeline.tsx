@@ -7,11 +7,7 @@ import { motion } from "motion/react";
 import { journeyData } from "@/data/portfolio-data";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SectionHeader } from "@/components/ui/section-header";
-import {
-	GraduationCap,
-	Briefcase,
-	Palette,
-} from "lucide-react";
+import { GraduationCap, Briefcase, Palette, Languages } from "lucide-react";
 
 export function EducationTimeline() {
 	const { t } = useTranslation();
@@ -21,6 +17,8 @@ export function EducationTimeline() {
 			0: "course",
 			1: "istad",
 			2: "rupp",
+			3: "ruppEnglish",
+			4: "ucEnglish",
 		};
 
 		return journeyData.map((item, idx) => {
@@ -57,14 +55,22 @@ export function EducationTimeline() {
 	const getMilestoneIcon = (type: string) => {
 		switch (type) {
 			case "career":
-				return <Briefcase className='w-8 h-8 text-[#bf4800] dark:text-[#f56300]' />;
+				return (
+					<Briefcase className='w-8 h-8 text-[#bf4800] dark:text-[#f56300]' />
+				);
 			case "course":
 				return (
 					<Palette className='w-8 h-8 text-[#0066cc] dark:text-[#2997ff]' />
 				);
+			case "language":
+				return (
+					<Languages className='w-8 h-8 text-[#0066cc] dark:text-[#2997ff]' />
+				);
 			case "education":
 			default:
-				return <GraduationCap className='w-8 h-8 text-[#bf4800] dark:text-[#f56300]' />;
+				return (
+					<GraduationCap className='w-8 h-8 text-[#bf4800] dark:text-[#f56300]' />
+				);
 		}
 	};
 
@@ -77,7 +83,9 @@ export function EducationTimeline() {
 					subtitle={t("journey.subtitle")}
 				/>
 
-				<div className='grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5'>
+				{/* Three per row on desktop (6-column grid, 2 columns each); a two-card
+				    last row starts one column in so it sits centred */}
+				<div className='grid grid-cols-1 md:grid-cols-6 gap-4 sm:gap-5'>
 					{localizedJourney.map((item, idx) => (
 						<motion.div
 							key={item.period + item.title}
@@ -89,7 +97,14 @@ export function EducationTimeline() {
 								delay: idx * 0.1,
 								ease: [0.16, 1, 0.3, 1],
 							}}
-							className='tile p-8 flex flex-col transition-transform duration-300 hover:scale-[1.015]'>
+							className={`tile p-8 flex flex-col md:col-span-2 ${
+								(
+									localizedJourney.length % 3 === 2 &&
+									idx === localizedJourney.length - 2
+								) ?
+									"md:col-start-2"
+								:	""
+							} transition-transform duration-300 hover:scale-[1.015]`}>
 							{getMilestoneIcon(item.type)}
 
 							<p className='mt-6 text-sm text-[#86868b]'>{item.period}</p>

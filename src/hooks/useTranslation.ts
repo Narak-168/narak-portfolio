@@ -12,8 +12,10 @@ import {
 	useSyncExternalStore,
 } from "react";
 import type { ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import enTranslations from "../../public/locales/en/common.json";
 import kmTranslations from "../../public/locales/km/common.json";
+import { LOCALE_PATHS, localeFromPath, type SiteLocale } from "@/lib/site";
 
 type TranslationDictionary = Record<string, unknown>;
 
@@ -31,48 +33,26 @@ type TranslationContextValue = {
 
 const TranslationContext = createContext<TranslationContextValue | null>(null);
 
-function getInitialLocale(): string {
+const PREFERENCE_KEY = "preferredLanguage";
+
+function getSavedLocale(): SiteLocale | null {
 	try {
-		const saved = localStorage.getItem("preferredLanguage");
+		const saved = localStorage.getItem(PREFERENCE_KEY);
 		if (saved === "en" || saved === "km") return saved;
 	} catch {
 		// Ignore storage errors
 	}
-	return "en";
-}
-
-// Client-side locale store. The server snapshot is always "en", so hydration
-// matches the server HTML and React switches to the saved locale right after.
-let currentLocale: string | null = null;
-const localeListeners = new Set<() => void>();
-
-function subscribeLocale(listener: () => void) {
-	localeListeners.add(listener);
-	return () => {
-		localeListeners.delete(listener);
-	};
-}
-
-function getLocaleSnapshot() {
-	if (currentLocale === null) currentLocale = getInitialLocale();
-	return currentLocale;
-}
-
-const getServerLocaleSnapshot = () => "en";
-
-function setLocale(newLocale: string) {
-	currentLocale = newLocale;
-	localeListeners.forEach((listener) => listener());
+	return null;
 }
 
 const emptySubscribe = () => () => {};
 
 export function TranslationProvider({ children }: { children: ReactNode }) {
-	const locale = useSyncExternalStore(
-		subscribeLocale,
-		getLocaleSnapshot,
-		getServerLocaleSnapshot,
-	);
+	// The URL decides the language ("/" English, "/km" Khmer). The server renders
+	// each page in its own language, so search engines can index both.
+	const pathname = usePathname();
+	const router = useRouter();
+	const locale = localeFromPath(pathname);
 	const mounted = useSyncExternalStore(
 		emptySubscribe,
 		() => true,
@@ -92,14 +72,27 @@ export function TranslationProvider({ children }: { children: ReactNode }) {
 		}
 	}, [locale]);
 
-	const changeLanguage = useCallback(async (newLocale: string) => {
-		try {
-			localStorage.setItem("preferredLanguage", newLocale);
-		} catch (e) {
-			console.warn("Could not save preferredLanguage to localStorage:", e);
+	// Returning visitors who picked Khmer before are sent to the Khmer page
+	useEffect(() => {
+		if (locale === "en" && getSavedLocale() === "km") {
+			router.replace(LOCALE_PATHS.km, { scroll: false });
 		}
-		setLocale(newLocale);
-	}, []);
+	}, [locale, router]);
+
+	const changeLanguage = useCallback(
+		async (newLocale: string) => {
+			if (newLocale !== "en" && newLocale !== "km") return;
+			try {
+				localStorage.setItem(PREFERENCE_KEY, newLocale);
+			} catch (e) {
+				console.warn("Could not save preferredLanguage to localStorage:", e);
+			}
+			if (newLocale === locale) return;
+			// Switch pages but keep the reader's scroll position
+			router.push(LOCALE_PATHS[newLocale], { scroll: false });
+		},
+		[locale, router],
+	);
 
 	const t = useCallback(
 		(key: string, options?: { returnObjects?: boolean }): any => {

@@ -160,21 +160,48 @@ function shapeStyle({ kind, size, colors }: ShapeConfig): CSSProperties {
 	}
 }
 
+export interface BurstTiming {
+	// Progress at which the first shape starts, the delay between shapes, and how long each takes
+	start: number;
+	step: number;
+	span: number;
+}
+
+const DEFAULT_TIMING: BurstTiming = { start: 0.02, step: 0.012, span: 0.22 };
+
 interface ShapeProps {
 	config: ShapeConfig;
 	index: number;
 	progress: MotionValue<number>;
 	width: MotionValue<number>;
 	height: MotionValue<number>;
+	originY: string;
+	timing: BurstTiming;
+	spread: number;
 }
 
-function Shape({ config, index, progress, width, height }: ShapeProps) {
+function Shape({
+	config,
+	index,
+	progress,
+	width,
+	height,
+	originY,
+	timing,
+	spread,
+}: ShapeProps) {
 	// Staggered windows so the shapes pop out one after another
-	const start = 0.02 + index * 0.012;
-	const t = useTransform(progress, [start, start + 0.22], [0, 1]);
+	const start = timing.start + index * timing.step;
+	const t = useTransform(progress, [start, start + timing.span], [0, 1]);
 
-	const x = useTransform([t, width], ([v, w]: number[]) => v * config.x * w);
-	const y = useTransform([t, height], ([v, h]: number[]) => v * config.y * h);
+	const x = useTransform(
+		[t, width],
+		([v, w]: number[]) => v * config.x * spread * w,
+	);
+	const y = useTransform(
+		[t, height],
+		([v, h]: number[]) => v * config.y * spread * h,
+	);
 	// Overshoot then settle, for the "pop"
 	const scale = useTransform(t, [0, 0.6, 1], [0.2, 1.15, 1]);
 	const opacity = useTransform(t, [0, 0.15], [0, 1]);
@@ -185,9 +212,10 @@ function Shape({ config, index, progress, width, height }: ShapeProps) {
 
 	return (
 		<motion.span
-			className='absolute left-1/2 top-[57%] will-change-transform'
+			className='absolute left-1/2 will-change-transform'
 			style={{
 				...style,
+				top: originY,
 				marginLeft: -(Number(style.width) / 2),
 				marginTop: -(Number(style.height) / 2),
 				x,
@@ -201,12 +229,25 @@ function Shape({ config, index, progress, width, height }: ShapeProps) {
 }
 
 interface ShapeBurstProps {
-	// 0 → 1 scroll progress of the section the burst lives in
+	// 0 → 1 scroll progress of the element the burst lives in
 	progress: MotionValue<number>;
+	// Recolours every shape from this list instead of the default Apple colours
+	palette?: string[];
+	// Vertical burst origin within the container
+	originY?: string;
+	timing?: BurstTiming;
+	// Scales how far the shapes travel; below 1 keeps them inside a small container
+	spread?: number;
 }
 
-// Colourful shapes that burst out from behind the hero portrait as the page scrolls
-export function ShapeBurst({ progress }: ShapeBurstProps) {
+// Colourful shapes that burst out from behind a portrait as the page scrolls
+export function ShapeBurst({
+	progress,
+	palette,
+	originY = "57%",
+	timing = DEFAULT_TIMING,
+	spread = 1,
+}: ShapeBurstProps) {
 	const reduceMotion = useReducedMotion();
 	const ref = useRef<HTMLDivElement>(null);
 	const width = useMotionValue(700);
@@ -238,11 +279,24 @@ export function ShapeBurst({ progress }: ShapeBurstProps) {
 			{SHAPES.map((config, index) => (
 				<Shape
 					key={index}
-					config={config}
+					config={
+						palette ?
+							{
+								...config,
+								colors: [
+									palette[index % palette.length],
+									palette[(index + 1) % palette.length],
+								],
+							}
+						:	config
+					}
 					index={index}
 					progress={smooth}
 					width={width}
 					height={height}
+					originY={originY}
+					timing={timing}
+					spread={spread}
 				/>
 			))}
 		</div>

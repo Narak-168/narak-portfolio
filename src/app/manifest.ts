@@ -1,13 +1,13 @@
 /** @format */
 
 import { MetadataRoute } from "next";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_ROLE } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {
-		name: "Narak Leng - Full Stack Developer Portfolio",
-		short_name: "Narak Leng",
-		description:
-			"Full Stack Developer specializing in modern web development with React, Next.js, TypeScript, and Node.js",
+		name: `${SITE_NAME} – ${SITE_ROLE}`,
+		short_name: SITE_NAME,
+		description: SITE_DESCRIPTION,
 		start_url: "/",
 		display: "standalone",
 		background_color: "#ffffff",
@@ -17,6 +17,17 @@ export default function manifest(): MetadataRoute.Manifest {
 				src: "/images/favicon.svg",
 				sizes: "any",
 				type: "image/svg+xml",
+			},
+			{
+				src: "/icon-192.png",
+				sizes: "192x192",
+				type: "image/png",
+			},
+			{
+				src: "/icon-512.png",
+				sizes: "512x512",
+				type: "image/png",
+				purpose: "any",
 			},
 		],
 	};

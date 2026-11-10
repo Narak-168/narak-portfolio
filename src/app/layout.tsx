@@ -1,10 +1,19 @@
 /** @format */
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { TranslationProvider } from "@/hooks/useTranslation";
+import { personalInfo } from "@/data/portfolio-data";
+import {
+	SITE_DESCRIPTION,
+	SITE_KEYWORDS,
+	SITE_NAME,
+	SITE_ROLE,
+	SITE_TITLE,
+	SITE_URL,
+} from "@/lib/site";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -12,57 +21,67 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(SITE_URL),
 	title: {
-		default: "Narak Leng | Front-end Developer",
-		template: "%s | Narak Leng",
+		default: SITE_TITLE,
+		template: `%s | ${SITE_NAME}`,
 	},
-	description:
-		"Portfolio of Narak Leng, a Front-end Developer from Cambodia specializing in React, Next.js, TypeScript, UI/UX, and responsive web development.",
-	keywords: [
-		"Narak Leng",
-		"Front-end Developer",
-		"Frontend Engineer",
-		"React Developer",
-		"Next.js Developer",
-		"TypeScript",
-		"Tailwind CSS",
-		"UI/UX Design",
-		"Web Developer Cambodia",
-		"Phnom Penh Developer",
-		"Portfolio",
-	],
-	authors: [{ name: "Narak Leng", url: "https://narak.dev" }],
-	creator: "Narak Leng",
-	publisher: "Narak Leng",
+	description: SITE_DESCRIPTION,
+	keywords: SITE_KEYWORDS,
+	applicationName: `${SITE_NAME} Portfolio`,
+	authors: [{ name: SITE_NAME, url: SITE_URL }],
+	creator: SITE_NAME,
+	publisher: SITE_NAME,
+	category: "technology",
+	// Canonical + hreflang are set per page (app/page.tsx and app/km/page.tsx) so
+	// each language version points at itself on narak.dev, not the vercel.app copy
 	formatDetection: {
 		email: false,
 		address: false,
 		telephone: false,
 	},
+	// Listing icons here overrides Next's automatic icon.png / apple-icon.png links,
+	// so the PNG fallbacks (search results, iOS home screen) are listed explicitly
 	icons: {
-		icon: [{ url: "/images/favicon.svg", type: "image/svg+xml" }],
+		icon: [
+			{ url: "/images/favicon.svg", type: "image/svg+xml" },
+			{ url: "/icon.png", type: "image/png", sizes: "48x48" },
+		],
+		apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
 	},
-	metadataBase: new URL("https://narak.dev"),
 	openGraph: {
-		title: "Narak Leng | Front-end Developer",
-		description:
-			"Portfolio of Narak Leng, a Front-end Developer from Cambodia specializing in React, Next.js, TypeScript, UI/UX, and responsive web development.",
-		url: "https://narak.dev",
-		siteName: "Narak Leng Portfolio",
+		title: SITE_TITLE,
+		description: SITE_DESCRIPTION,
+		url: "/",
+		siteName: `${SITE_NAME} Portfolio`,
 		locale: "en_US",
-		type: "website",
+		alternateLocale: ["km_KH"],
+		type: "profile",
+		firstName: "Narak",
+		lastName: "Leng",
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Narak Leng | Front-end Developer",
-		description:
-			"Portfolio of Narak Leng, a Front-end Developer from Cambodia specializing in React, Next.js, TypeScript, UI/UX, and responsive web development.",
-		creator: "@Narak-168",
+		title: SITE_TITLE,
+		description: SITE_DESCRIPTION,
 	},
 	robots: {
 		index: true,
 		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
 	},
+};
+
+export const viewport: Viewport = {
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "#ffffff" },
+		{ media: "(prefers-color-scheme: dark)", color: "#000000" },
+	],
 };
 
 export default function RootLayout({
@@ -70,41 +89,76 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	// Person + WebSite graph; profile links must match the real accounts exactly
 	const jsonLd = {
 		"@context": "https://schema.org",
-		"@type": "Person",
-		name: "Narak Leng",
-		url: "https://narak.dev",
-		jobTitle: "Front-end Developer",
-		address: {
-			"@type": "PostalAddress",
-			addressLocality: "Phnom Penh",
-			addressCountry: "Cambodia",
-		},
-		description:
-			"Portfolio of Narak Leng, a Front-end Developer from Cambodia specializing in React, Next.js, TypeScript, UI/UX, and responsive web development.",
-		email: "narakleng168@gmail.com",
-		sameAs: [
-			"https://github.com/Narak-168",
-			"https://www.linkedin.com/in/narak-leng",
-			"https://t.me/narakleng",
-		],
-		knowsAbout: [
-			"React",
-			"Next.js",
-			"TypeScript",
-			"JavaScript",
-			"Tailwind CSS",
-			"Frontend Development",
-			"UI/UX Design",
-			"Responsive Web Design",
-			"Spring Boot",
-			"PostgreSQL",
+		"@graph": [
+			{
+				"@type": "Person",
+				"@id": `${SITE_URL}/#person`,
+				name: SITE_NAME,
+				givenName: "Narak",
+				familyName: "Leng",
+				url: SITE_URL,
+				image: `${SITE_URL}/images/Narak-NoBG.PNG`,
+				jobTitle: SITE_ROLE,
+				description: SITE_DESCRIPTION,
+				email: `mailto:${personalInfo.email}`,
+				address: {
+					"@type": "PostalAddress",
+					addressLocality: "Phnom Penh",
+					addressCountry: "KH",
+				},
+				worksFor: {
+					"@type": "Organization",
+					name: "DemoQ (Cambodia) Co., Ltd.",
+					url: "https://demoq.com.kh",
+				},
+				alumniOf: [
+					{
+						"@type": "CollegeOrUniversity",
+						name: "Royal University of Phnom Penh",
+					},
+					{
+						"@type": "EducationalOrganization",
+						name: "Institute of Science and Technology Advanced Development (ISTAD)",
+					},
+				],
+				knowsLanguage: ["en", "km"],
+				knowsAbout: [
+					"Front End Development",
+					"UX/UI Design",
+					"React",
+					"Next.js",
+					"TypeScript",
+					"JavaScript",
+					"Tailwind CSS",
+					"Figma",
+					"Responsive Web Design",
+					"Spring Boot",
+					"PostgreSQL",
+				],
+				sameAs: [
+					personalInfo.githubUrl,
+					personalInfo.linkedinUrl,
+					personalInfo.telegramUrl,
+				],
+			},
+			{
+				"@type": "WebSite",
+				"@id": `${SITE_URL}/#website`,
+				url: SITE_URL,
+				name: `${SITE_NAME} Portfolio`,
+				description: SITE_DESCRIPTION,
+				inLanguage: ["en", "km"],
+				publisher: { "@id": `${SITE_URL}/#person` },
+			},
 		],
 	};
 
 	return (
-		<html lang='en' suppressHydrationWarning className='scroll-smooth'>
+		// `relative` lets Motion's useScroll measure scroll offsets against the page
+		<html lang='en' suppressHydrationWarning className='relative scroll-smooth'>
 			<head>
 				<script
 					type='application/ld+json'

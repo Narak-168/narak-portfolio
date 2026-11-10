@@ -61,26 +61,28 @@ export function HeroSection({ onOpenCV }: HeroSectionProps) {
 					{t("hero.status")}
 				</motion.p>
 
-				<motion.p
-					initial={{ opacity: 0, y: 16 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.7, delay: 0.05, ease }}
-					className='mt-5 text-2xl sm:text-3xl font-semibold tracking-[-0.02em] text-[#1d1d1f] dark:text-[#f5f5f7]'>
-					{t("hero.greeting")} {t("hero.im")} {t("hero.name")}
-				</motion.p>
-
-				<motion.h1
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, delay: 0.1, ease }}
-					className='mt-2 text-[40px] sm:text-6xl md:text-7xl font-semibold tracking-[-0.04em] leading-[1.06] text-[#1d1d1f] dark:text-[#f5f5f7]'>
-					{/* One inline-block so a single gradient runs across both lines */}
-					<span className='inline-block pb-1 bg-gradient-to-r from-[#0071e3] via-[#9b51e0] to-[#f56300] dark:from-[#2997ff] dark:via-[#bf5af2] dark:to-[#ff9f0a] bg-clip-text text-transparent'>
-						{t("hero.role")}
-						<br />
-						{t("hero.and")} {t("hero.designer")}
-					</span>
-				</motion.h1>
+				{/* One h1 holding the name and the role, so search engines read
+				    "Hello!! I'm Narak, Front End Developer & UX/UI Designer" */}
+				<h1 className='mt-5 font-semibold text-[#1d1d1f] dark:text-[#f5f5f7]'>
+					<motion.span
+						initial={{ opacity: 0, y: 16 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7, delay: 0.05, ease }}
+						className='block text-2xl sm:text-3xl tracking-[-0.02em]'>
+						{t("hero.greeting")} {t("hero.im")} {t("hero.name")}
+					</motion.span>{" "}
+					<motion.span
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.1, ease }}
+						className='block mt-2 text-[40px] sm:text-6xl md:text-7xl tracking-[-0.04em] leading-[1.06]'>
+						{/* One inline-block so a single gradient runs across both lines */}
+						<span className='inline-block pb-1 bg-gradient-to-r from-[#0071e3] via-[#9b51e0] to-[#f56300] dark:from-[#2997ff] dark:via-[#bf5af2] dark:to-[#ff9f0a] bg-clip-text text-transparent'>
+							{t("hero.role")} <br />
+							{t("hero.and")} {t("hero.designer")}
+						</span>
+					</motion.span>
+				</h1>
 
 				<motion.p
 					initial={{ opacity: 0, y: 20 }}

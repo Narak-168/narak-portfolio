@@ -42,13 +42,16 @@ export interface ExperienceItem {
 	location: string;
 	responsibilities: string[];
 	keySkills: string[];
+	// Transparent cut-out of me at this workplace, with shape colours picked from the photo
+	photo?: string;
+	photoPalette?: string[];
 }
 
 export interface JourneyMilestone {
 	period: string;
 	title: string;
 	institution: string;
-	type: "education" | "career" | "course";
+	type: "education" | "career" | "course" | "language";
 	description: string;
 	highlights: string[];
 	badge?: string;
@@ -350,7 +353,7 @@ export const projectsData: Project[] = [
 		technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Motion", "i18n"],
 		githubUrl: "https://github.com/Narak-168/narak-portfolio",
 		liveUrl: "https://narak.dev",
-		previewImage: "/images/projectCover/narak img.webp",
+		previewImage: "/images/projectCover/personal-portfolio.webp",
 		features: [
 			"Lightning-fast Next.js App Router with server-side metadata optimization",
 			"Bilingual Khmer (Krasar font) and English localization engine",
@@ -620,6 +623,35 @@ export const journeyData: JourneyMilestone[] = [
 			"Graduated with practical capstone development projects",
 		],
 	},
+	{
+		// Year not recorded yet; the period slot shows the programme type instead
+		period: "Language Studies",
+		title: "Upper-Intermediate Levels in English",
+		institution: "Royal University of Phnom Penh (RUPP)",
+		type: "language",
+		badge: "English Language",
+		logo: "/images/RUPP-Eng.png",
+		description:
+			"English language studies at the Royal University of Phnom Penh, completed through the Upper-Intermediate level.",
+		highlights: [
+			"Reading, writing, listening and speaking skills",
+			"Academic and professional English communication",
+		],
+	},
+	{
+		period: "Language Studies",
+		title: "Intensive English Program",
+		institution: "University of Cambodia (UC)",
+		type: "language",
+		badge: "English Language",
+		logo: "/images/UC.png",
+		description:
+			"An intensive English language program at the University of Cambodia, building fluency for study and work.",
+		highlights: [
+			"Intensive practice across all four language skills",
+			"Confident everyday and workplace English",
+		],
+	},
 ];
 
 export const skillsData = {
@@ -788,6 +820,9 @@ export const experiencesData: ExperienceItem[] = [
 		companyDetail: "Leading retail conglomerate in Cambodia",
 		period: "Previous Experience",
 		location: "Phnom Penh, Cambodia",
+		photo: "/images/experience/chip-mong.webp",
+		// Magenta lanyard and the blue phone
+		photoPalette: ["#e5195e", "#ff6b9a", "#7fb3ff", "#b0124a"],
 		responsibilities: [
 			"Managing and validating employee data across supermarket branches with high accuracy.",
 			"Preparing performance and KPI information to support strategic management decisions.",
@@ -809,6 +844,9 @@ export const experiencesData: ExperienceItem[] = [
 		companyDetail: "Leading digital bank & financial institution in Cambodia",
 		period: "Previous Experience",
 		location: "Phnom Penh, Cambodia",
+		photo: "/images/experience/wing-bank.webp",
+		// Wing Bank logo yellow and blue
+		photoPalette: ["#ffd60a", "#0a84ff", "#ffe066", "#0059b3"],
 		responsibilities: [
 			"Crafted engaging employee onboarding materials that streamlined new hire acclimation.",
 			"Designed internal communication visual assets, newsletters, and informational announcements.",
@@ -830,6 +868,9 @@ export const experiencesData: ExperienceItem[] = [
 		companyDetail: "Private K-12 educational academy",
 		period: "Previous Experience",
 		location: "Phnom Penh, Cambodia",
+		photo: "/images/experience/private-school.webp",
+		// Lime-green uniform
+		photoPalette: ["#8cc63f", "#5fa82a", "#c9ec7a", "#2e7d32"],
 		responsibilities: [
 			"Taught Information & Communication Technology (ICT) curriculum in English to students.",
 			"Supported students with hands-on technology education, computer literacy, and basic programming concepts.",
