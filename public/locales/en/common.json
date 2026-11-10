@@ -16,8 +16,9 @@
 		"greeting": "Hello!!",
 		"im": "I'm",
 		"name": "Narak,",
-		"role": "Front-End",
-		"developer": "Developer.",
+		"role": "Front End Developer",
+		"and": "&",
+		"designer": "UX/UI Designer",
 		"intro": "IT graduate and Front-End Developer passionate about building responsive, user-friendly, and visually clean web experiences.",
 		"viewWork": "View My Work",
 		"downloadCV": "Download CV"
